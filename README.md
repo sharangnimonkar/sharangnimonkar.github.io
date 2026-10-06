@@ -1,4 +1,4 @@
-[README.md](https://github.com/user-attachments/files/33105267/README.md)[Uploadin# sharangnimonkar.github.io
+# sharangnimonkar.github.io
 
 Personal portfolio site for Sharang Nimonkar, clinical programmer (SAS, R and pharmaverse, CDISC SDTM and ADaM).
 
@@ -34,4 +34,3 @@ The site is served by GitHub Pages from the `main` branch (root). Pushing a chan
 
 - [Profile README](https://github.com/sharangnimonkar/sharangnimonkar)
 - [Clinical programming portfolio](https://github.com/sharangnimonkar/clinical-programming-portfolio)
-g README.md…]()
