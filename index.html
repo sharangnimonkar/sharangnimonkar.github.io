@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sharang Nimonkar | Clinical Programmer</title>
+<meta name="description" content="Clinical programmer: SAS, R and pharmaverse, CDISC SDTM and ADaM, safety reporting, R packages and Shiny dashboards.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F5F7; --panel:#FFFFFF; --ink:#16232D; --muted:#4D5F6B; --rule:#CBD6DD;
+  --accent:#0B6E8A; --flag:#B3471D; --flagbg:#FBEDE6; --okbg:#E3F1F5;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0F1A21; --panel:#16252F; --ink:#E6EEF2; --muted:#9DB0BC; --rule:#2B404D;
+    --accent:#5CC0DB; --flag:#F0956B; --flagbg:#3A2418; --okbg:#173642;}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
+.wrap{max-width:62rem;margin:0 auto;padding:0 1.5rem}
+header.top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;padding:1.5rem 0;border-bottom:1px solid var(--rule)}
+.brand{font:600 1.05rem var(--sans);color:var(--ink);text-decoration:none}
+nav a{margin-left:1.25rem;color:var(--muted);text-decoration:none;font-size:.95rem}
+nav a:hover{color:var(--accent);text-decoration:underline}
+
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;padding:4rem 0 3.5rem;align-items:start}
+h1{font:600 clamp(2.2rem,5vw,3.4rem)/1.08 var(--serif);letter-spacing:-.01em;margin:0 0 1.25rem;max-width:16ch}
+.lede{font-size:1.1rem;color:var(--muted);max-width:34rem;margin:0 0 1.75rem}
+.actions{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:.65rem 1.1rem;border:1px solid var(--accent);border-radius:4px;font-weight:600;text-decoration:none;font-size:.95rem}
+.btn.primary{background:var(--accent);color:var(--bg)}
+.btn.ghost{color:var(--accent)}
+.btn:hover{filter:brightness(1.08)}
+
+.listing{background:var(--panel);border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.listing .bar{display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.6rem .9rem;border-bottom:1px solid var(--rule);font-size:.8rem;color:var(--muted)}
+.listing pre{margin:0;padding:1rem .9rem;font:400 .8rem/1.75 var(--mono);overflow-x:auto;white-space:pre}
+.row{display:block;padding:0 .35rem;margin:0 -.35rem}
+.row.ok{background:transparent}
+.row.diff{background:var(--flagbg);color:var(--flag)}
+.listing .foot{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding:.7rem .9rem;border-top:1px solid var(--rule);font-size:.8rem;color:var(--muted)}
+.toggle{font:600 .8rem var(--sans);padding:.4rem .75rem;border:1px solid var(--accent);background:transparent;color:var(--accent);border-radius:4px;cursor:pointer}
+.toggle:hover{background:var(--okbg)}
+#status{font-weight:600}
+#status.bad{color:var(--flag)}
+
+section{padding:3rem 0;border-top:1px solid var(--rule)}
+h2{font:600 1.75rem/1.2 var(--serif);margin:0 0 1.5rem}
+.projects{list-style:none;margin:0;padding:0}
+.projects li{display:grid;grid-template-columns:13rem 1fr;gap:1.5rem;padding:1.25rem 0;border-bottom:1px solid var(--rule)}
+.projects li:first-child{padding-top:0}
+.projects h3{font:600 1.05rem/1.3 var(--sans);margin:0}
+.projects p{margin:0 0 .5rem;max-width:42rem}
+.tag{font-size:.85rem;color:var(--muted)}
+.links a{margin-right:1rem;font-size:.95rem;font-weight:500}
+
+dl.skills{display:grid;grid-template-columns:13rem 1fr;gap:.9rem 1.5rem;margin:0}
+dl.skills dt{font-weight:600}
+dl.skills dd{margin:0;color:var(--muted)}
+.about p{max-width:42rem;margin:0 0 1rem}
+footer{padding:2rem 0 3rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.9rem}
+
+@media (max-width:52rem){
+  .hero{grid-template-columns:1fr;gap:2rem;padding-top:2.5rem}
+  .projects li,dl.skills{grid-template-columns:1fr;gap:.4rem}
+  nav a{margin:0 1rem 0 0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top">Sharang Nimonkar</a>
+    <nav aria-label="Sections">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div>
+        <h1>Clinical programmer who builds the QC tooling too.</h1>
+        <p class="lede">About 7.5 years across clinical SAS programming, pharmaverse R development and regulated operations. ADaM and SDTM derivations, safety reporting, macros, and R packages that make validation repeatable.</p>
+        <div class="actions">
+          <a class="btn primary" href="#projects">See the projects</a>
+          <!-- Add your CV PDF at cv/Sharang_Clinical.pdf, or change this link -->
+          <a class="btn ghost" href="cv/Sharang_Clinical.pdf">Download CV</a>
+          <a class="btn ghost" href="https://github.com/sharangnimonkar">GitHub</a>
+        </div>
+      </div>
+
+      <figure class="listing" style="margin:0">
+        <div class="bar"><span>classiccompare: ADSL production vs validation</span><span>illustrative output</span></div>
+        <pre id="out" aria-label="Example comparison output"><span class="row ok">Variables in BASE not in COMPARE .... 0</span><span class="row ok">Observations in BASE not in COMPARE . 0</span><span class="row ok">Observations in COMPARE not in BASE . 0</span><span class="row ok" id="vals">Values compared unequal ............ 0</span></pre>
+        <div class="foot">
+          <span id="status" aria-live="polite">Return code 0: datasets match</span>
+          <button class="toggle" id="flip" type="button" aria-pressed="false">Introduce a difference</button>
+        </div>
+      </figure>
+    </div>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <ul class="projects">
+        <li>
+          <div><h3>classiccompare</h3><span class="tag">R package</span></div>
+          <div>
+            <p>Replicates SAS <code>PROC COMPARE</code> in R: ID and BY matching, EXACT, ABSOLUTE, RELATIVE and PERCENT methods, VAR and WITH selection, and a SYSINFO-style return code for automated QC. Built for production-versus-validation comparison of datasets such as ADSL.</p>
+            <p class="tag">Documented with roxygen2, tested with testthat, R CMD check clean, GitHub Actions CI.</p>
+            <div class="links"><a href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/01_R_Package_Development/classiccompare">Source</a></div>
+          </div>
+        </li>
+        <li>
+          <div><h3>Safety monitoring dashboard</h3><span class="tag">R Shiny</span></div>
+          <div>
+            <p>Interactive adverse event review on pharmaverseadam ADaM data. Subject-level incidence by SOC and preferred term, AE listings, per-subject timelines, and filters for treatment arm, severity and treatment-emergent status.</p>
+            <!-- Add a "Live app" link here once the app is hosted, e.g. on shinyapps.io -->
+            <div class="links"><a href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/07_RShiny_Safety_Monitoring_Dashboard">Source</a></div>
+          </div>
+        </li>
+        <li>
+          <div><h3>SDTM and ADaM programming</h3><span class="tag">R, pharmaverse</span></div>
+          <div>
+            <p>SDTM domains built with controlled terminology and validation checks, and ADaM datasets with traceability from SDTM to ADaM, using pharmaverse tools.</p>
+            <div class="links">
+              <a href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/02_SDTM_Programming">SDTM</a>
+              <a href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/03_ADaM_Programming">ADaM</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div><h3>Tables, listings and graphs</h3><span class="tag">R</span></div>
+          <div>
+            <p>Adverse event summary tables, patient listings and safety visualizations, delivered as HTML and PDF reports.</p>
+            <div class="links"><a href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/04_TLG_Generation">Source</a></div>
+          </div>
+        </li>
+        <li>
+          <div><h3>descriptiveStats</h3><span class="tag">R package</span></div>
+          <div>
+            <p>Mean, median, mode, quartiles and IQR with NA-aware handling and clear errors for empty, non-numeric or all-NA input.</p>
+            <div class="links"><a href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/01_R_Package_Development/descriptive_stats">Source</a></div>
+          </div>
+        </li>
+        <li>
+          <div><h3>AI clinical data agent</h3><span class="tag">Python</span></div>
+          <div>
+            <p>Automated clinical data processing and schema-routed query handling in a Python workflow.</p>
+            <div class="links">
+              <a href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/06_AI_Clinical_Data_Agent">Source</a>
+              <a href="https://github.com/sharangnimonkar/clinical-programming-portfolio">All modules</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <p class="tag" style="margin-top:1.25rem">All portfolio work uses public data such as pharmaverseadam and CDISC pilot datasets. No employer or client material is included.</p>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <dl class="skills">
+        <dt>Standards</dt><dd>CDISC SDTM and ADaM, controlled terminology, Pinnacle 21 validation, double-programming QC</dd>
+        <dt>Languages</dt><dd>SAS (including macro authoring), R (pharmaverse, Shiny, package development), Python</dd>
+        <dt>Reporting</dt><dd>Safety TLGs, patient profiles and narratives, HTML and PDF reports, R Shiny dashboards, Power BI</dd>
+        <dt>Engineering</dt><dd>Git and GitHub, GitHub Actions CI, testthat, roxygen2, reproducible project structure</dd>
+      </dl>
+    </section>
+
+    <section id="about" class="about">
+      <h2>About</h2>
+      <p>I work across the full path from SDTM through ADaM to safety outputs. Client-facing roles at Pfizer (via Infosys) and Viatris (via TCS) covered clinical SAS programming, safety reporting and automation of patient profiles and narratives.</p>
+      <p>I hold an MS in Diagnostics and Precision Medicine from Dublin City University and an MS in Microbiology, and I worked as a microbiologist before moving into clinical programming. I'm based in the UK with full right to work.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Open to senior clinical and analytical data programmer roles in the UK.</p>
+      <p class="links">
+        <a href="mailto:sharangnimonkar@gmail.com">sharangnimonkar@gmail.com</a>
+        <a href="https://www.linkedin.com/in/sharang92/">LinkedIn</a>
+        <a href="https://github.com/sharangnimonkar">GitHub</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>Built with plain HTML and CSS. Hosted on GitHub Pages.</footer>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('flip'), vals=document.getElementById('vals'),
+      st=document.getElementById('status'), diff=false;
+  btn.addEventListener('click',function(){
+    diff=!diff;
+    btn.setAttribute('aria-pressed',diff);
+    btn.textContent=diff?'Restore match':'Introduce a difference';
+    vals.className='row '+(diff?'diff':'ok');
+    vals.textContent=diff?'Values compared unequal ............ 3':'Values compared unequal ............ 0';
+    st.className=diff?'bad':'';
+    st.textContent=diff?'Non-zero return code: differences found':'Return code 0: datasets match';
+  });
+})();
+</script>
+</body>
+</html>
