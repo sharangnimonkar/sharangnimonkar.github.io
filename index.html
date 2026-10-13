@@ -17,250 +17,691 @@
 <meta name="twitter:image" content="https://sharangnimonkar.github.io/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0A1116; --panel:#121D25; --ink:#EAF1F5; --muted:#9DB0BC; --rule:#243642;
-  --accent:#4FD1C5; --accent-ink:#06211E; --flag:#F0956B; --flagbg:#3A2418; --okbg:#16303A; --glow:rgba(79,209,197,.14);
-  --serif:"Newsreader",Georgia,"Times New Roman",serif;
-  --sans:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --bg:#031219; --bg2:#06222b; --panel:rgba(9,40,50,.72); --panel-solid:#0a2832;
+  --ink:#EAF6F8; --muted:#9FB9C2; --rule:#14505a; --rule-soft:#0f3a43;
+  --accent:#19DDD0; --accent-ink:#022a28; --accent-soft:rgba(25,221,208,.12);
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
-}
-:root[data-theme="light"]{
-  --bg:#F2F5F7; --panel:#FFFFFF; --ink:#16232D; --muted:#4D5F6B; --rule:#CBD6DD;
-  --accent:#0B6E8A; --accent-ink:#FFFFFF; --flag:#B3471D; --flagbg:#FBEDE6; --okbg:#E3F1F5; --glow:rgba(11,110,138,.08);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+body{margin:0;color:var(--ink);font:400 .95rem/1.55 var(--sans);-webkit-font-smoothing:antialiased;
+  background:radial-gradient(70rem 40rem at 85% -5%,rgba(25,221,208,.14),transparent 60%),
+             radial-gradient(50rem 30rem at 0 30%,rgba(18,110,140,.12),transparent 60%),var(--bg)}
 a{color:var(--accent);text-underline-offset:3px}
-a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
-.wrap{max-width:62rem;margin:0 auto;padding:0 1.5rem}
-header.top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;padding:1.5rem 0;border-bottom:1px solid var(--rule)}
-.brand{font:600 1.05rem var(--sans);color:var(--ink);text-decoration:none}
-nav a{margin-left:1.25rem;color:var(--muted);text-decoration:none;font-size:.95rem}
-nav a:hover{color:var(--accent);text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:74rem;margin:0 auto;padding:0 1.25rem}
+svg{display:block}
+.ico{width:1.25rem;height:1.25rem;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ico.fill{fill:currentColor;stroke:none}
 
-.hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:3.5rem 0 2.5rem;background:radial-gradient(60rem 28rem at 50% 0,var(--glow),transparent 70%)}
-.badge{display:inline-flex;align-items:center;gap:.6rem;padding:.45rem 1.1rem;border:1px solid var(--accent);border-radius:999px;color:var(--accent);font-weight:600;font-size:.9rem;margin-bottom:2rem}
-.badge::before{content:"";width:.55rem;height:.55rem;border-radius:50%;background:var(--accent)}
-.avatar{position:relative;width:9.5rem;height:9.5rem;border-radius:50%;border:3px solid var(--rule);background:var(--panel);display:grid;place-items:center;font:600 2.4rem var(--serif);color:var(--accent);overflow:hidden;margin-bottom:1.75rem}
-.avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-h1{font:600 clamp(2.8rem,9vw,5.5rem)/1.02 var(--sans);letter-spacing:-.025em;margin:0 0 1.25rem}
+/* header */
+header.top{position:sticky;top:0;z-index:10;background:rgba(3,18,25,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule-soft)}
+header.top .wrap{display:flex;align-items:center;gap:1.5rem;padding-top:.7rem;padding-bottom:.7rem}
+.brand{display:flex;align-items:center;gap:.7rem;color:var(--ink);text-decoration:none;font-weight:600;font-size:1.05rem}
+.logo{font-weight:800;font-size:1.35rem;color:var(--accent);letter-spacing:-.04em;border:2px solid var(--accent);border-radius:6px;padding:0 .3rem;line-height:1.4}
+nav{display:flex;gap:1.6rem;margin:0 auto}
+nav a{color:var(--muted);text-decoration:none;font-size:.82rem;padding:.9rem 0;border-bottom:2px solid transparent}
+nav a:hover,nav a.on{color:var(--accent);border-color:var(--accent)}
+.hdr-ico{display:flex;gap:1rem;align-items:center}
+.hdr-ico a{color:var(--ink);display:flex}
+.hdr-ico a:hover{color:var(--accent)}
+.btn{display:inline-flex;align-items:center;gap:.55rem;padding:.6rem 1.15rem;border:1px solid var(--accent);border-radius:999px;font-weight:600;text-decoration:none;font-size:.85rem;color:var(--accent);background:transparent}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.dark{color:var(--ink);border-color:var(--rule);background:rgba(255,255,255,.03)}
+.btn:hover{filter:brightness(1.12)}
+.btn .ico{width:1rem;height:1rem}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:2rem;align-items:center;padding:2.2rem 0 1.2rem}
+.eyebrow{font-size:.68rem;letter-spacing:.12em;color:var(--ink);margin:0 0 .6rem;text-transform:uppercase}
+.eyebrow i{font-style:normal;color:var(--muted);margin:0 .5rem}
+h1{font:800 clamp(2.5rem,6.6vw,4.3rem)/1.02 var(--sans);letter-spacing:-.035em;margin:0 0 .9rem}
 h1 .a{color:var(--accent)}
-.role{font:500 1.15rem var(--sans);color:var(--ink);margin:0 0 .75rem}
-.lede{font-size:1.1rem;color:var(--muted);max-width:40rem;margin:0 0 1.75rem}
-.actions{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center}
-.btn{display:inline-block;padding:.65rem 1.2rem;border:1px solid var(--accent);border-radius:999px;font-weight:600;text-decoration:none;font-size:.95rem}
-.btn.primary{background:var(--accent);color:var(--accent-ink)}
-.btn.ghost{color:var(--accent)}
-.btn:hover{filter:brightness(1.1)}
-.demo{max-width:34rem;margin:0 auto 3rem}
-.theme{background:transparent;border:1px solid var(--rule);color:var(--ink);width:2.4rem;height:2.4rem;border-radius:50%;cursor:pointer;font-size:1.05rem;line-height:1}
-.theme:hover{border-color:var(--accent)}
-.right{display:flex;align-items:center;gap:1rem}
-
-.listing{background:var(--panel);border:1px solid var(--rule);border-radius:6px;overflow:hidden}
-.listing .bar{display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.6rem .9rem;border-bottom:1px solid var(--rule);font-size:.8rem;color:var(--muted)}
-.listing pre{margin:0;padding:1rem .9rem;font:400 .8rem/1.75 var(--mono);overflow-x:auto;white-space:pre}
-.row{display:block;padding:0 .35rem;margin:0 -.35rem}
-.row.ok{background:transparent}
-.row.diff{background:var(--flagbg);color:var(--flag)}
-.listing .foot{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding:.7rem .9rem;border-top:1px solid var(--rule);font-size:.8rem;color:var(--muted)}
-.toggle{font:600 .8rem var(--sans);padding:.4rem .75rem;border:1px solid var(--accent);background:transparent;color:var(--accent);border-radius:4px;cursor:pointer}
-.toggle:hover{background:var(--okbg)}
-#status{font-weight:600}
-#status.bad{color:var(--flag)}
-
-section{padding:3rem 0;border-top:1px solid var(--rule)}
-h2{font:600 1.75rem/1.2 var(--serif);margin:0 0 1.5rem}
-.projects{list-style:none;margin:0;padding:0}
-.projects li{display:grid;grid-template-columns:13rem 1fr;gap:1.5rem;padding:1.25rem 0;border-bottom:1px solid var(--rule)}
-.projects li:first-child{padding-top:0}
-.projects h3{font:600 1.05rem/1.3 var(--sans);margin:0}
-.projects p{margin:0 0 .5rem;max-width:42rem}
-.tag{font-size:.85rem;color:var(--muted)}
-.links a{margin-right:1rem;font-size:.95rem;font-weight:500}
-
-dl.skills{display:grid;grid-template-columns:13rem 1fr;gap:.9rem 1.5rem;margin:0}
-dl.skills dt{font-weight:600}
-dl.skills dd{margin:0;color:var(--muted)}
-.about p{max-width:42rem;margin:0 0 1rem}
-footer{padding:2rem 0 3rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.9rem}
-
-@media (max-width:52rem){
-  .projects li,dl.skills{grid-template-columns:1fr;gap:.4rem}
-  nav a{margin:0 1rem 0 0}
+.role{font:600 1.15rem var(--sans);margin:0 0 .8rem}
+.lede{color:var(--muted);max-width:34rem;margin:0 0 1.3rem;font-size:.95rem}
+.actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:1.3rem}
+.actions .btn{padding:.75rem 1.35rem}
+.facts{display:flex;gap:1.6rem;flex-wrap:wrap}
+.fact{display:flex;align-items:center;gap:.65rem;font-size:.75rem;line-height:1.3;color:var(--muted)}
+.fact .ico{color:var(--accent);width:1.4rem;height:1.4rem}
+.fact b{display:block;color:var(--ink);font-weight:500}
+.portrait{position:relative;min-height:19rem;display:flex;justify-content:center;align-items:center}
+.helix {
+  position: absolute;
+  right: -1rem;
+  top: 0;
+  bottom: 0;
+  width: 11rem;
+  opacity: .28;                  /* Low opacity ensures it acts as a clean layout backdrop */
+  object-fit: cover;             /* Crops the graphics strand beautifully to frame heights */
+  object-position: right center;  /* Anchors the glowing focal point cleanly under text elements */
+  pointer-events: none;          /* Keeps text hover, drag select, and cursor click selections smooth */
+  z-index: 0;                    /* Layers layout graphic safely behind quotes and tags */
 }
+.avatar{position:relative;z-index:1;width:15.5rem;height:15.5rem;border-radius:50%;border:2px solid var(--accent);box-shadow:0 0 40px rgba(25,221,208,.35);background:var(--bg2);display:grid;place-items:center;font:700 3.4rem var(--sans);color:var(--accent);overflow:hidden;margin-right: 15.0rem;}
+.avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position: center 30%;}
+.quote{position:absolute;z-index:2;right:6.5rem;top:6rem;max-width:11.5rem;background:rgba(6,34,43,.88);border:1px solid var(--rule);border-radius:10px;padding:.8rem .9rem;font-size:.92rem;line-height:1.35}
+.quote::after{content:"";display:block;width:2rem;height:3px;background:var(--accent);margin-top:.55rem;border-radius:2px}
+.tags{position:absolute;z-index:2;right:4rem;bottom:.2rem;margin:0;padding:0;list-style:none;font-size:.62rem;letter-spacing:.14em;color:var(--accent);line-height:2}
+.tags li::before{content:"";display:inline-block;width:.28rem;height:.28rem;background:var(--accent);border-radius:50%;margin-right:.6rem;vertical-align:middle}
+.quote span {
+  display: block;
+}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--rule);border-radius:12px;background:var(--panel);margin:1rem 0 1.4rem}
+.stat{display:flex;align-items:center;gap:.8rem;padding:.9rem 1rem;border-left:1px solid var(--rule-soft)}
+.stat:first-child{border-left:0}
+.stat .ico{color:var(--accent);width:2rem;height:2rem;flex:none;stroke-width:1.4}
+.stat b{display:block;font-size:1.2rem;font-weight:700;line-height:1.1}
+.stat span{font-size:.68rem;color:var(--muted);line-height:1.3;display:block}
+
+/* section titles */
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;margin:1.6rem 0 .8rem}
+h2{font:700 1.45rem/1.2 var(--sans);margin:0;letter-spacing:-.01em}
+h2 .star{color:var(--accent);margin-right:.4rem}
+.more{font-size:.78rem;font-weight:500;text-decoration:none}
+
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:12px}
+
+/* skills */
+.skills{display:grid;grid-template-columns:.95fr 1.15fr 1.3fr 1.15fr 1fr;gap:.7rem}
+.skill{padding:.8rem .9rem}
+.skill h3{font:600 .8rem var(--sans);margin:0 0 .7rem}
+.chips{display:flex;gap:.55rem;flex-wrap:wrap;align-items:flex-end}
+.chip{display:flex;flex-direction:column;align-items:center;gap:.3rem;font-size:.6rem;color:var(--muted)}
+.badge{width:2.5rem;height:2.5rem;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:.62rem;letter-spacing:-.02em;color:#fff;border:1px solid rgba(255,255,255,.18)}
+.b-sas{background:#0b3a6e}.b-r{background:#1e5fa3;font-size:1rem}.b-py{background:#2a4d73;color:#ffd43b;font-size:1rem}
+.b-cdisc{background:#c8102e;border-radius:6px;font-size:.5rem}.b-sdtm{background:#0a7bbf;border-radius:6px;font-size:.5rem}.b-adam{background:#0c7a4b;border-radius:6px;font-size:.5rem}.b-med{background:#4a5fc1}
+.b-hex{background:#10252d;border-radius:12px;font-size:.5rem;color:#fff;font-weight:600}
+.b-pink{background:#e9a6e4;color:#4a1244}.b-dk{background:#10252d}
+.b-shiny{background:#1b86c7;border-radius:12px}.b-api{background:#0d7f6e}.b-ai{background:#10252d;border:1px solid var(--accent);color:var(--accent)}
+.b-gh{background:#10252d}.b-ci{background:#10252d;color:var(--accent)}.b-dock{background:#1d63ed}.b-az{background:#0078d4}
+
+/* featured */
+.slide-nav{display:flex;gap:.4rem}
+.slide-nav .sq{width:1.9rem;height:1.9rem;border:1px solid var(--rule);background:transparent;color:var(--ink);border-radius:6px;display:grid;place-items:center;opacity:.45}
+.feat{display:grid;grid-template-columns:1fr 1.05fr;gap:1rem;padding:1rem}
+.feat-l h3{font:600 1.5rem var(--sans);margin:0 0 .5rem;display:flex;align-items:center;gap:.7rem;letter-spacing:-.02em}
+.pill{font:500 .65rem var(--sans);color:var(--accent);background:var(--accent-soft);border:1px solid var(--rule);border-radius:6px;padding:.15rem .5rem;letter-spacing:0}
+.feat-l p{margin:0 0 .6rem;color:var(--muted);font-size:.85rem}
+.feat-l p.lead{color:var(--ink);font-size:.95rem}
+code{font-family:var(--mono);font-size:.9em}
+.feat-btns{display:flex;gap:.6rem;flex-wrap:wrap;margin:.9rem 0}
+.feat-tags{display:flex;gap:.45rem;flex-wrap:wrap}
+.tg{font-size:.68rem;color:var(--ink);border:1px solid var(--rule);border-radius:6px;padding:.25rem .6rem;background:rgba(255,255,255,.02)}
+.tg.ok{color:var(--accent)}
+.feat-r{display:grid;grid-template-columns:1.25fr 1fr;gap:.8rem}
+.term{border:1px solid var(--rule);border-radius:8px;background:#031a21;overflow:hidden}
+.tabs{display:flex;border-bottom:1px solid var(--rule)}
+.tabs button{flex:1;background:transparent;border:0;border-bottom:2px solid transparent;color:var(--muted);font:500 .68rem var(--sans);padding:.6rem .3rem;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--accent);border-color:var(--accent)}
+.pane{padding:.9rem .9rem 1rem;font:400 .74rem/1.9 var(--mono);white-space:pre;overflow-x:auto;min-height:10.5rem}
+.pane[hidden]{display:none}
+.pane .ok{color:var(--accent)}
+.pane .bad{color:#F0956B}
+.pane table{font:400 .72rem/1.4 var(--sans);width:100%;border-collapse:collapse;white-space:normal}
+.pane td{padding:.35rem 0;border-bottom:1px solid var(--rule-soft)}
+.pane td:last-child{text-align:right}
+.illus{border:1px solid var(--rule);border-radius:8px;padding:.7rem;background:rgba(255,255,255,.015);display:flex;flex-direction:column;gap:.6rem}
+.illus .hd{display:flex;gap:.5rem;align-items:center;font-size:.68rem;color:var(--muted)}
+.illus table{width:100%;border-collapse:collapse;font-size:.72rem}
+.illus th{font-weight:500;color:var(--muted);text-align:left;border-bottom:1px solid var(--rule);padding:.3rem 0}
+.illus th:last-child,.illus td:last-child{text-align:right}
+.illus td{padding:.38rem 0;border-bottom:1px solid var(--rule-soft)}
+.verdict{margin-top:auto;display:flex;align-items:center;gap:.6rem;border:1px solid var(--accent);border-radius:8px;padding:.6rem .7rem;font-size:.74rem;line-height:1.3}
+.verdict .tick{width:1.8rem;height:1.8rem;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;flex:none}
+.verdict .tick .ico{width:1rem;height:1rem;stroke-width:3}
+.verdict small{display:block;color:var(--muted);font-size:.68rem}
+.verdict.bad{border-color:#F0956B}
+.verdict.bad .tick{background:#F0956B}
+.flip{font:600 .68rem var(--sans);padding:.35rem .7rem;border:1px solid var(--accent);background:transparent;color:var(--accent);border-radius:6px;cursor:pointer;align-self:flex-start}
+.flip:hover{background:var(--accent-soft)}
+
+/* project cards */
+.projects{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+.proj{padding:.55rem;display:flex;flex-direction:column}
+.thumb{position:relative;height:6.3rem;border-radius:8px;background:#041c24;border:1px solid var(--rule-soft);overflow:hidden;margin-bottom:.6rem}
+.thumb svg{width:100%;height:100%}
+.thumb .pill{position:absolute;top:.4rem;right:.4rem;background:rgba(3,26,33,.9);z-index:1}
+.proj h3{font:700 .88rem var(--sans);margin:0 0 .3rem;padding:0 .3rem}
+.proj p{margin:0 0 .6rem;padding:0 .3rem;font-size:.74rem;line-height:1.45;color:var(--muted)}
+.proj .tg-row{display:flex;gap:.35rem;flex-wrap:wrap;padding:0 .3rem;margin-top:auto;margin-bottom:.6rem}
+.proj .tg-row .tg{font-size:.62rem;padding:.2rem .5rem}
+.proj .view{padding:0 .3rem .3rem;font-size:.74rem;font-weight:500;text-decoration:none}
+.proj-wide{grid-column:span 2;position:relative;overflow:hidden;padding:1.3rem 1.5rem;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(100deg,rgba(3,18,25,.95) 20%,rgba(10,70,85,.55));min-height:12rem}
+.proj-wide blockquote{margin:0;font:500 1.35rem/1.3 Georgia,"Times New Roman",serif;max-width:22rem;position:relative;z-index:1}
+.proj-wide blockquote::after{content:"";display:block;width:2.4rem;height:3px;background:var(--accent);margin-top:.9rem}
+.vials{position:absolute;right:0;top:0;bottom:0;width:60%;opacity:.55}
+.values{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:1.3rem;font-size:.72rem;position:relative;z-index:1}
+.values span{display:flex;align-items:center;gap:.4rem}
+.values .ico{width:1rem;height:1rem;color:var(--accent);stroke-width:2.4}
+
+/* experience / education */
+.two{display:grid;grid-template-columns:1fr 1.2fr;gap:.9rem;margin-top:1.4rem}
+.panel{padding:1.1rem 1.2rem}
+.panel h2{font-size:1.1rem;display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
+.panel h2 .ico{color:var(--accent)}
+.job{display:grid;grid-template-columns:5.2rem 1fr;gap:.9rem;align-items:center;padding:.5rem 0}
+.wm{font-weight:800;font-size:1rem;letter-spacing:-.04em}
+.wm.inf{color:#3a8dde;font-weight:600}.wm.ics{color:#e8eef0;font-size:1.4rem;font-weight:500}.wm.wip{color:#e8eef0;font-weight:600;font-size:1.25rem}.wm.sig{color:#6fb3e3;font-weight:600;font-size:.95rem}.wm.hei{color:#fff;text-align:center;font-size:.8rem;line-height:1}
+.wm.hei i{display:block;color:#e2231a;font-style:normal;font-size:1rem;line-height:1}
+.job b{font-size:.78rem;font-weight:600;display:block;line-height:1.3}
+.job span{font-size:.68rem;color:var(--muted);display:block;line-height:1.4}
+.edu-grid{display:grid;grid-template-columns:1fr 11.5rem;gap:1rem}
+.edu{display:grid;grid-template-columns:2rem 1fr;gap:.8rem;padding:.45rem 0;align-items:start}
+.edu .ei{width:1.8rem;height:1.8rem;border:1px solid var(--accent);border-radius:7px;display:grid;place-items:center;color:var(--accent)}
+.edu .ei .ico{width:1rem;height:1rem}
+.edu b{display:block;font-size:.78rem;font-weight:600;line-height:1.3}
+.edu span{display:block;font-size:.68rem;color:var(--muted);line-height:1.4}
+.minis{border:1px solid var(--rule);border-radius:10px;padding:.7rem .8rem;display:flex;flex-direction:column;gap:.5rem;align-self:center}
+.mini{display:flex;align-items:center;gap:.6rem;font-size:.75rem}
+.mini .badge{width:1.7rem;height:1.7rem;font-size:.5rem;border:1px solid var(--accent)}
+
+/* about + cta */
+.about{padding:1.1rem 1.2rem;margin-top:1.4rem}
+.about h2{font-size:1.1rem;margin-bottom:.6rem}
+.about p{margin:0 0 .6rem;color:var(--muted);max-width:56rem;font-size:.85rem}
+.cta{display:flex;align-items:center;gap:1.2rem;padding:1rem 1.3rem;margin:1.4rem 0 1rem;flex-wrap:wrap}
+.cta .ico.big{width:2.6rem;height:2.6rem;color:var(--accent);stroke-width:1.3;flex:none}
+.cta h3{margin:0;font:600 1rem var(--sans)}
+.cta p{margin:.15rem 0 0;font-size:.78rem;color:var(--muted)}
+.cta .txt{flex:1;min-width:16rem}
+.cta .soc{display:flex;gap:.9rem;align-items:center}
+.cta .soc a{color:var(--ink);display:flex}
+.cta .soc a:hover{color:var(--accent)}
+footer{padding:.8rem 0 2.4rem;color:var(--muted);font-size:.75rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+footer a{color:var(--muted)}
+
+@media (max-width:64rem){
+  .skills{grid-template-columns:repeat(3,1fr)}
+  .projects{grid-template-columns:repeat(2,1fr)}
+  .feat{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr}
+  nav{display:none}
+  header.top .wrap{justify-content:space-between}
+}
+@media (max-width:50rem){
+  .hero{grid-template-columns:1fr}
+  .portrait{min-height:20rem}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{border-left:0;border-top:1px solid var(--rule-soft)}
+  .skills{grid-template-columns:1fr 1fr}
+  .feat-r{grid-template-columns:1fr}
+  .edu-grid{grid-template-columns:1fr}
+  .hdr-ico .btn{display:none}
+}
+
+@media (max-width:34rem){
+  .projects,.skills{grid-template-columns:1fr}
+  .proj-wide{grid-column:auto}
+  .stats{grid-template-columns:1fr}
+  .quote{position:static;margin-top:1rem}
+  .portrait{flex-direction:column}
+  .tags{position:static;margin-top:1rem}
+  /* RE-ADDED HERE: Hides the new image asset on mobile viewports */
+  .helix{display:none} 
+}
+
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.lg{width:3rem;height:3rem;flex:none}
+.lg.wide{width:4.4rem}
+.lg.sm{width:1.9rem;height:1.9rem}
+.lg.sm.wide{width:2.8rem}
+.chips{gap:.7rem}
+.chip{font-size:.62rem;gap:.35rem}
+.mini{gap:.7rem}
+
+
+h2,.panel h2{font-family:var(--serif);font-weight:700;font-size:1.7rem;letter-spacing:-.005em}
+.panel h2{font-size:1.35rem}
+.about h2{font-size:1.35rem}
+.more{color:var(--accent);font-size:.82rem;font-weight:600}
+.skills{gap:.75rem}
+.skill{padding:.9rem 1rem 1rem;background:linear-gradient(180deg,rgba(12,52,64,.7),rgba(7,32,41,.8))}
+.skill h3{font:700 .85rem var(--sans);margin:0 0 .85rem}
+.chips{align-items:flex-start;gap:.8rem}
+.chip{font-size:.65rem;color:var(--muted);gap:.4rem;min-width:2.6rem}
+.lg{width:2.9rem;height:2.9rem}
+.lg.wide{width:4.2rem}
+.slide-nav{gap:.5rem}
+.slide-nav .sq{opacity:1;width:2.1rem;height:1.9rem;background:var(--panel);border-radius:6px;font-size:1.1rem;line-height:1}
+.feat{background:linear-gradient(120deg,rgba(14,70,82,.55),rgba(7,32,41,.85) 60%);box-shadow:0 0 40px rgba(25,221,208,.08) inset;padding:1.2rem}
+.feat-l h3{font:700 1.7rem var(--sans);letter-spacing:-.03em}
+.feat-l h3 .mark{color:var(--accent)}
+.feat-l p{color:#d3e6ea}
+.feat-l p.lead{color:#fff;font-size:1rem}
+.hl{color:var(--accent)}
+.feat-l .feat-btns .btn{padding:.8rem 1.6rem;font-size:.9rem}
+.feat-btns .btn.dark{border-color:#cfe3e8;color:#fff;background:rgba(0,0,0,.25)}
+.tg{background:rgba(3,18,25,.6);border-color:var(--rule);padding:.3rem .7rem;font-size:.72rem}
+.tg.ok{background:rgba(25,221,208,.12);border-color:var(--accent);color:var(--accent)}
+.term{background:rgba(3,20,26,.85)}
+.tabs button{padding:.75rem .3rem;font-size:.72rem;color:#d3e6ea}
+.pane{margin:.7rem;border:1px solid var(--rule);border-radius:6px;background:#031411;font-size:.78rem;line-height:1.85;min-height:9.5rem;padding:.9rem 1rem}
+.pane .n{color:#f2b84b;font-weight:500}
+.pane .ok{color:#34e0a1}
+.pane .bad{color:#F0956B}
+.illus{background:rgba(3,20,26,.85)}
+.illus th{background:rgba(25,221,208,.08);padding:.4rem .5rem;font-size:.72rem;color:#d3e6ea}
+.illus td{padding:.45rem .5rem}
+.illus th+th,.illus td+td{border-left:1px solid var(--rule-soft);text-align:center}
+.illus th:last-child,.illus td:last-child{text-align:center}
+.verdict{background:rgba(3,26,33,.9);border-color:#1f8f88}
+.verdict div{font-weight:600;color:#fff;font-size:.8rem}
+.verdict small{color:#34e0a1;font-weight:500}
+.verdict.bad small{color:#F0956B}
+
+.skills{grid-template-columns:minmax(0,.95fr) repeat(4,minmax(0,1fr))}
+.chips{flex-wrap:nowrap;gap:.5rem;align-items:flex-start}
+.chip{flex:1 1 0;min-width:0;text-align:center;white-space:nowrap}
+.chip:has(.wide){flex:1.7 1 0}
+.chips .lg{width:100%;max-width:2.9rem;height:auto;aspect-ratio:1/1}
+.chips .lg.wide{max-width:4.2rem;aspect-ratio:76/48}
+@media (max-width:64rem){.skills{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:34rem){.skills{grid-template-columns:minmax(0,1fr)}}
+
+.btn .ico{width:1.2rem;height:1.2rem;flex:none;stroke-width:2.6;overflow:visible}
+.btn.primary .ico{stroke:var(--accent-ink)}
+.arr{display:inline-block;width:1.1em;height:1.1em;vertical-align:-.2em;margin-left:.25rem;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.view,.more{display:inline-flex;align-items:center}
+.wm.hei{text-align:left;justify-self:start}
+.wm.hei i{text-align:left}
+
+.proj-wide{padding:1.6rem 1.8rem;min-height:12.5rem;background:#062a33;border-color:var(--rule)}
+.proj-wide::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(3,22,29,.97) 0%,rgba(3,22,29,.88) 38%,rgba(3,22,29,.25) 75%,rgba(3,22,29,.1) 100%);pointer-events:none}
+.vials{position:absolute;right:0;top:0;bottom:0;width:100%;height:100%;opacity:1}
+.proj-wide blockquote{font:600 1.55rem/1.3 var(--serif);max-width:26rem;color:#f2fafb;position:relative;z-index:2}
+.proj-wide blockquote::after{width:2.8rem;height:3px;margin-top:1.1rem}
+.values{gap:1.6rem;margin-top:1.4rem;position:relative;z-index:2;font-size:.74rem;color:#e6f3f5}
+.values span{gap:.55rem}
+.values .vi{width:1.35rem;height:1.35rem;flex:none}
+@media (max-width:34rem){.proj-wide blockquote{font-size:1.25rem}.values{gap:.9rem}}
+
+.projects{gap:.9rem}
+.proj{padding:.65rem;border-color:#1f8f88;box-shadow:0 0 22px rgba(25,221,208,.07) inset,0 0 0 1px rgba(25,221,208,.05);background:linear-gradient(180deg,rgba(9,44,55,.8),rgba(5,26,34,.9))}
+.proj .thumb{height:8.4rem;margin-bottom:.8rem;border-radius:9px}
+.proj .thumb svg{width:100%;height:100%}
+.pill{font:500 .78rem var(--sans);color:#e2f7f5;background:rgba(6,40,50,.88);border:1px solid #1f8f88;border-radius:8px;padding:.3rem .8rem}
+.proj .thumb .pill{top:.5rem;right:.5rem}
+.proj h3{font:700 1rem var(--sans);margin:0 0 .4rem;padding:0 .35rem}
+.proj p{font-size:.8rem;line-height:1.5;color:#d3e6ea;padding:0 .35rem;margin:0 0 .8rem}
+.proj .tg-row{padding:0 .35rem;margin-bottom:.8rem;gap:.45rem}
+.proj .tg-row .tg{font-size:.72rem;padding:.3rem .75rem;border-radius:7px;background:rgba(3,20,26,.7);border:1px solid #1d5560}
+.proj .view{padding:0 .35rem .2rem;font-size:.82rem;font-weight:700;color:var(--accent)}
+.proj.alt .hd{display:flex;justify-content:space-between;align-items:center;gap:.6rem;padding:.1rem .35rem .7rem}
+.proj.alt .hd h3{margin:0;padding:0;font-size:.95rem}
+.proj.alt .hd .pill{white-space:nowrap;font-size:.74rem;padding:.25rem .7rem}
+.proj .ill{height:5.9rem;display:flex;align-items:center;padding:0 .35rem;margin-bottom:.6rem}
+.proj .ill svg{width:100%;height:100%}
+
+/* keep all five skill cards on one row on tablets/laptops */
+.skills{grid-template-columns:minmax(0,.95fr) repeat(4,minmax(0,1fr))!important;gap:.5rem}
+.skill{padding:.8rem .7rem .9rem;min-width:0}
+.skill h3{font-size:.8rem;line-height:1.25}
+.chips{flex-wrap:nowrap!important;gap:.3rem}
+.chip{font-size:.6rem}
+@media (max-width:44rem){
+  .skills{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media (max-width:28rem){
+  .skills{grid-template-columns:minmax(0,1fr)!important}
+}
+
+/* project tags: always one row */
+.proj .tg-row{flex-wrap:nowrap!important;gap:.35rem;justify-content:flex-start;overflow:hidden}
+.proj .tg-row .tg{flex:0 1 auto;min-width:0;white-space:nowrap;font-size:clamp(.58rem,.95vw,.72rem);padding:.3rem clamp(.4rem,.8vw,.7rem)}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="top">
-    <a class="brand" href="#top">Sharang Nimonkar</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-gh" viewBox="0 0 24 24"><path d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.300 3.400 1 .1-.8.4-1.300.7-1.600-2.600-.3-5.300-1.300-5.300-5.700 0-1.300.5-2.300 1.200-3.100-.1-.3-.5-1.500.1-3.100 0 0 1-.3 3.200 1.200a11 11 0 0 1 5.800 0c2.200-1.500 3.200-1.200 3.200-1.200.6 1.600.2 2.800.1 3.100.8.800 1.200 1.800 1.200 3.100 0 4.400-2.700 5.400-5.300 5.700.4.400.8 1.100.8 2.200v3.200c0 .3.2.7.8.6A11.500 11.500 0 0 0 23.500 12 11.500 11.500 0 0 0 12 .5z"/></symbol>
+    <symbol id="i-in" viewBox="0 0 24 24"><path d="M20.400 20.500h-3.600v-5.600c0-1.300 0-3-1.800-3s-2.100 1.400-2.100 2.900v5.700H9.300V9h3.400v1.600c.5-.9 1.600-1.800 3.400-1.800 3.600 0 4.300 2.400 4.300 5.500v6.200zM5.300 7.400a2.100 2.100 0 1 1 0-4.100 2.100 2.100 0 0 1 0 4.100zM7.100 20.500H3.600V9h3.500v11.500zM22.200 0H1.800C.8 0 0 .8 0 1.700v20.600c0 .9.8 1.700 1.800 1.700h20.400c1 0 1.800-.8 1.800-1.700V1.700C24 .8 23.200 0 22.200 0z"/></symbol>
+
+    <radialGradient id="gGlobe" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#7fb2f2"/><stop offset="1" stop-color="#2b4fc0"/></radialGradient>
+    <linearGradient id="gAdm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6bdf0"/><stop offset="1" stop-color="#d77fcd"/></linearGradient>
+    <linearGradient id="gPh" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14527f"/><stop offset="1" stop-color="#0a2a47"/></linearGradient>
+    <symbol id="l-sas" viewBox="0 0 76 48"><path d="M20 8C8 8 6 18 15 22s8 11-3 16" stroke="#2d8be0" stroke-width="5.5" fill="none" stroke-linecap="round"/><path d="M26 12c6 1 9 4 4 8" stroke="#6fb6f5" stroke-width="3" fill="none" stroke-linecap="round"/><text x="32" y="33" font-size="19" font-weight="800" fill="#EAF6F8" font-family="Inter,sans-serif">SAS</text></symbol>
+    <symbol id="l-r" viewBox="0 0 48 48"><ellipse cx="24" cy="25" rx="22" ry="17" fill="#b7c3ce"/><ellipse cx="22" cy="26" rx="14" ry="9.500" fill="#0a2832"/><text x="24" y="35" text-anchor="middle" font-size="29" font-weight="800" fill="#2a74c8" stroke="#0a2832" stroke-width=".6" font-family="Inter,sans-serif">R</text></symbol>
+    <symbol id="l-py" viewBox="0 0 48 48"><path id="pyh" d="M23 3c-8 0-8 3-8 6v5h9v2H11c-4 0-7 3-7 9s3 9 7 9h4v-6c0-4 3-7 7-7h9c3 0 6-3 6-6V9c0-4-4-6-14-6z" fill="#3d7ab8"/><circle cx="19" cy="9" r="2" fill="#fff"/><path d="M25 45c8 0 8-3 8-6v-5h-9v-2h13c4 0 7-3 7-9s-3-9-7-9h-4v6c0 4-3 7-7 7h-9c-3 0-6 3-6 6v7c0 4 4 6 14 6z" fill="#ffd43b"/><circle cx="29" cy="39" r="2" fill="#fff"/></symbol>
+    <symbol id="l-globe" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="url(#gGlobe)"/><g stroke="#fff" stroke-opacity=".5" fill="none"><ellipse cx="24" cy="24" rx="9" ry="21"/><path d="M4 24h40M7 14h34M7 34h34"/></g></symbol>
+    <symbol id="l-bolt" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="#05998b"/><path d="M27 8L14 27h9l-2 13 13-20h-9z" fill="#fff"/></symbol>
+    <symbol id="l-ai" viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" stroke="#EAF6F8" stroke-width="6" stroke-dasharray="4.200 4.200" fill="none"/><circle cx="24" cy="24" r="14" fill="#0a2832" stroke="#EAF6F8" stroke-width="2"/><text x="24" y="29.500" text-anchor="middle" font-size="14" font-weight="700" fill="#EAF6F8" font-family="Inter,sans-serif">AI</text></symbol>
+    <symbol id="l-gh" viewBox="0 0 48 48"><use href="#i-gh" x="4" y="4" width="40" height="40" fill="#fff"/></symbol>
+    <symbol id="l-cicd" viewBox="0 0 48 48"><g stroke="#EAF6F8" stroke-width="2.500" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="37" r="4.500"/><circle cx="11" cy="11" r="4.500"/><circle cx="37" cy="24" r="4.500"/><path d="M11 15.500v17M15.500 11h9c6 0 8 4 8 9M15.500 37h9c6 0 8-4 8-9"/></g></symbol>
+    <symbol id="l-dock" viewBox="0 0 48 48"><g fill="#2396ed"><rect x="9" y="19" width="5.500" height="5"/><rect x="15.500" y="19" width="5.500" height="5"/><rect x="22" y="19" width="5.500" height="5"/><rect x="28.500" y="19" width="5.500" height="5"/><rect x="15.500" y="13" width="5.500" height="5"/><rect x="22" y="13" width="5.500" height="5"/><rect x="28.500" y="13" width="5.500" height="5"/><rect x="22" y="7" width="5.500" height="5"/><path d="M3 26h36c2 0 4-1.500 5-4 2 .5 3 2 3 3-1 10-9 17-21 17C14 42 5 37 3 26z"/></g></symbol>
+    <symbol id="l-az" viewBox="0 0 48 48"><path d="M18 5h12L13 41H2z" fill="#2f9bf0"/><path d="M30 12l16 29H17l15-5-9-14z" fill="#0f6fd0"/></symbol>
+    <symbol id="l-cdisc" viewBox="0 0 48 48"><polygon points="24,2 43,13 43,35 24,46 5,35 5,13" fill="#1d8f88" stroke="#7fe3da" stroke-width="2"/><text x="24" y="27" text-anchor="middle" font-size="7.500" font-weight="800" fill="#fff" font-family="Inter,sans-serif">CDISC</text></symbol>
+    <symbol id="l-sdtm" viewBox="0 0 48 48"><polygon points="24,2 43,13 43,35 24,46 5,35 5,13" fill="#1585c9" stroke="#8fd0fa" stroke-width="2"/><text x="24" y="27" text-anchor="middle" font-size="8" font-weight="800" fill="#fff" font-family="Inter,sans-serif">SDTM</text></symbol>
+    <symbol id="l-adam" viewBox="0 0 48 48"><polygon points="24,2 43,13 43,35 24,46 5,35 5,13" fill="#12803f" stroke="#7fe0a4" stroke-width="2"/><text x="24" y="27" text-anchor="middle" font-size="8.500" font-weight="800" fill="#fff" font-family="Inter,sans-serif">ADaM</text></symbol>
+    <symbol id="l-tidy" viewBox="0 0 48 48"><polygon points="24,2 43,13 43,35 24,46 5,35 5,13" fill="#0b1b22" stroke="#EAF6F8" stroke-width="2"/><text x="24" y="27" text-anchor="middle" font-size="7.500" font-weight="700" fill="#EAF6F8" font-family="Inter,sans-serif">tidyverse</text></symbol>
+    <symbol id="l-pharma" viewBox="0 0 48 48"><polygon points="24,2 43,13 43,35 24,46 5,35 5,13" fill="url(#gPh)" stroke="#2aa0e0" stroke-width="2"/><text x="24" y="27" text-anchor="middle" font-size="6.500" font-weight="700" fill="#EAF6F8" font-family="Inter,sans-serif">pharmaverse</text></symbol>
+    <symbol id="l-admiral" viewBox="0 0 48 48"><polygon points="24,2 43,13 43,35 24,46 5,35 5,13" fill="url(#gAdm)" stroke="#fbd5f7" stroke-width="2"/><text x="24" y="27" text-anchor="middle" font-size="7.500" font-weight="700" fill="#4a1244" font-family="Inter,sans-serif">admiral</text></symbol>
+    <symbol id="l-rtables" viewBox="0 0 48 48"><polygon points="24,2 43,13 43,35 24,46 5,35 5,13" fill="#0b1b22" stroke="#EAF6F8" stroke-width="2"/><text x="24" y="27" text-anchor="middle" font-size="7.500" font-weight="700" fill="#EAF6F8" font-family="Inter,sans-serif">rtables</text></symbol>
+    <symbol id="l-shiny" viewBox="0 0 48 48"><polygon points="24,2 43,13 43,35 24,46 5,35 5,13" fill="#2b8ad6" stroke="#8fd0fa" stroke-width="2"/><text x="24" y="28.500" text-anchor="middle" font-size="11" font-weight="700" font-style="italic" fill="#fff" font-family="Georgia,serif">Shiny</text></symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="logo">SN</span>Sharang Nimonkar</a>
     <nav aria-label="Sections">
+      <a href="#top" class="on">Home</a>
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
       <a href="#education">Education</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
-    <button class="theme" id="theme" type="button" aria-label="Switch to light theme">☀</button>
-  </header>
+    <div class="hdr-ico">
+      <a href="https://github.com/sharangnimonkar" aria-label="GitHub"><svg class="ico fill" viewBox="0 0 24 24"><use href="#i-gh"/></svg></a>
+      <a href="https://www.linkedin.com/in/sharang92/" aria-label="LinkedIn"><svg class="ico fill" viewBox="0 0 24 24"><use href="#i-in"/></svg></a>
+      <!-- Add your CV PDF at cv/Sharang_Clinical.pdf, or change this link -->
+      <a class="btn" href="cv/Sharang_Clinical.pdf"><svg class="ico" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Download CV</a>
+    </div>
+  </div>
+</header>
 
-  <main id="top">
-    <div class="hero">
-      <div class="badge">Full UK right to work | Open to senior clinical programmer roles</div>
-      <!-- Photo: photo.jpg in the repo root; initials show if it is missing -->
-      <div class="avatar" aria-hidden="false"><span>SN</span><img src="photo.jpg" alt="Sharang Nimonkar" onerror="this.remove()"></div>
+<main id="top" class="wrap">
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Clinical Programmer<i>|</i>Data Automation<i>|</i>AI in Healthcare</p>
       <h1>Sharang <span class="a">Nimonkar</span></h1>
-      <p class="role">Clinical programmer who builds the QC tooling too.</p>
-      <p class="lede">Four years of clinical programming across SAS, pharmaverse R development, Python for data automation and regulated operations. ADaM and SDTM derivations, safety reporting, macros, and R packages that make validation repeatable.</p>
+      <p class="role">Clinical programming · QC tooling · Data automation</p>
+      <p class="lede">Four years of clinical programming across SAS and R/Pharmaverse, with Python for data automation and regulated operations. Building reproducible clinical data tools, validation workflows and interactive applications for better, faster and more reliable clinical insights.</p>
       <div class="actions">
-        <a class="btn primary" href="#projects">See the projects</a>
-        <!-- Add your CV PDF at cv/Sharang_Clinical.pdf, or change this link -->
-        <a class="btn ghost" href="cv/Sharang_Clinical.pdf">Download CV</a>
-        <a class="btn ghost" href="https://github.com/sharangnimonkar">GitHub</a>
+        <a class="btn primary" href="#projects">View Projects <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn dark" href="cv/Sharang_Clinical.pdf"><svg class="ico" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Download CV</a>
+        <a class="btn dark" href="https://github.com/sharangnimonkar"><svg class="ico fill" viewBox="0 0 24 24"><use href="#i-gh"/></svg>GitHub</a>
+      </div>
+      <div class="facts">
+        <div class="fact"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg><span><b>Open to UK roles</b>(Full work rights)</span></div>
+        <div class="fact"><svg class="ico" viewBox="0 0 24 24"><path d="M12 21s7-6.100 7-11.500A7 7 0 0 0 5 9.500C5 14.900 12 21 12 21z"/><circle cx="12" cy="9.500" r="2.500"/></svg><span><b>Reading, UK</b></span></div>
+        <div class="fact"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg><span><b>Remote / Hybrid</b></span></div>
+        <div class="fact"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.500-3.400 8-8 9-4.600-1-8-4.500-8-9V6l8-3z"/><path d="M8.500 12l2.500 2.500 4.500-5"/></svg><span><b>No sponsorship</b>required</span></div>
       </div>
     </div>
-    <div class="demo">
-      <figure class="listing" style="margin:0">
-        <div class="bar"><span>classiccompare: ADSL production vs validation</span><span>illustrative output</span></div>
-        <pre id="out" aria-label="Example comparison output"><span class="row ok">Variables in BASE not in COMPARE .... 0</span><span class="row ok">Observations in BASE not in COMPARE . 0</span><span class="row ok">Observations in COMPARE not in BASE . 0</span><span class="row ok" id="vals">Values compared unequal ............ 0</span></pre>
-        <div class="foot">
-          <span id="status" aria-live="polite">Return code 0: datasets match</span>
-          <button class="toggle" id="flip" type="button" aria-pressed="false">Introduce a difference</button>
-        </div>
-      </figure>
+
+    <div class="portrait">
+    <!-- New replacement DNA background graphic asset -->
+    <img src="images/dna-helix.png" class="helix" alt="DNA Background Design Structure" />
+    
+    <!-- Photo: photo.jpg in the repo root; initials show if it is missing -->
+    <div class="avatar"><span>SN</span><img src="photo.jpg" alt="Sharang Nimonkar" onerror="this.remove()"></div>
+
+    
+    <div class="quote">
+      <span>"Clinical data,</span>
+      <span>better tools,</span>
+      <span>safer decisions."</span>
     </div>
 
-    <section id="projects">
-      <h2>Projects</h2>
-      <ul class="projects">
-        <li>
-          <div><h3>classiccompare</h3><span class="tag">R package</span></div>
-          <div>
-            <p>Replicates SAS <code>PROC COMPARE</code> in R: ID and BY matching, EXACT, ABSOLUTE, RELATIVE and PERCENT methods, VAR and WITH selection, and a SYSINFO-style return code for automated QC. Built for production-versus-validation comparison of datasets such as ADSL.</p>
-            <p class="tag">Documented with roxygen2, tested with testthat, R CMD check clean, GitHub Actions CI.</p>
-            <div class="links"><a href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/01_R_Package_Development/classiccompare">Source</a></div>
+    <ul class="tags" aria-label="Focus areas">
+      <li>CLINICAL DATA</li><li>AUTOMATION</li><li>QUALITY CONTROL</li><li>PHARMAVERSE</li><li>AI IN HEALTHCARE</li>
+    </ul>
+  </div>
+</section>
+
+  <section class="stats" aria-label="Highlights">
+    <div class="stat"><svg class="ico" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg><div><b>4+ Years</b><span>Clinical programming experience</span></div></div>
+    <div class="stat"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.600 5.600l2.100 2.100M16.300 16.300l2.100 2.100M18.400 5.600l-2.100 2.100M7.700 16.300l-2.100 2.100"/></svg><div><b>15+</b><span>Studies across phases (SDTM, ADaM, Safety)</span></div></div>
+    <div class="stat"><svg class="ico" viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg><div><b>3 Languages</b><span>SAS · R · Python</span></div></div>
+    <div class="stat"><svg class="ico" viewBox="0 0 24 24"><rect x="4" y="12" width="4" height="8"/><rect x="10" y="7" width="4" height="13"/><rect x="16" y="3" width="4" height="17"/></svg><div><b>1000+</b><span>Patient profiles &amp; safety narratives</span></div></div>
+    <div class="stat"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.500-3.400 8-8 9-4.600-1-8-4.500-8-9V6l8-3z"/><path d="M8.500 12l2.500 2.500 4.500-5"/></svg><div><b>~95-98%</b><span>Sponsor acceptance rate for deliverables</span></div></div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-h"><h2>Technical Skills</h2><a class="more" href="https://www.linkedin.com/in/sharang92/">View all skills <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a></div>
+    <div class="skills">
+      <div class="card skill"><h3>Programming</h3><div class="chips">
+        <div class="chip"><svg class="lg wide" role="img" aria-label="sas"><use href="#l-sas"/></svg></div>
+        <div class="chip"><svg class="lg" role="img" aria-label="R"><use href="#l-r"/></svg>R</div>
+        <div class="chip"><svg class="lg" role="img" aria-label="Python"><use href="#l-py"/></svg>Python</div></div></div>
+      <div class="card skill"><h3>Clinical Data Standards</h3><div class="chips">
+        <div class="chip"><svg class="lg" role="img" aria-label="cdisc"><use href="#l-cdisc"/></svg></div><div class="chip"><svg class="lg" role="img" aria-label="sdtm"><use href="#l-sdtm"/></svg></div><div class="chip"><svg class="lg" role="img" aria-label="adam"><use href="#l-adam"/></svg></div><div class="chip"><svg class="lg" role="img" aria-label="MedDRA"><use href="#l-globe"/></svg>MedDRA</div></div></div>
+      <div class="card skill"><h3>R Ecosystem (Pharmaverse)</h3><div class="chips">
+        <div class="chip"><svg class="lg" role="img" aria-label="tidy"><use href="#l-tidy"/></svg></div><div class="chip"><svg class="lg" role="img" aria-label="pharma"><use href="#l-pharma"/></svg></div><div class="chip"><svg class="lg" role="img" aria-label="admiral"><use href="#l-admiral"/></svg></div><div class="chip"><svg class="lg" role="img" aria-label="rtables"><use href="#l-rtables"/></svg></div></div></div>
+      <div class="card skill"><h3>Data Apps &amp; Automation</h3><div class="chips">
+        <div class="chip"><svg class="lg" role="img" aria-label="shiny"><use href="#l-shiny"/></svg></div><div class="chip"><svg class="lg" role="img" aria-label="FastAPI"><use href="#l-bolt"/></svg>FastAPI</div><div class="chip"><svg class="lg" role="img" aria-label="Python"><use href="#l-py"/></svg></div><div class="chip"><svg class="lg" role="img" aria-label="ai"><use href="#l-ai"/></svg></div></div></div>
+      <div class="card skill"><h3>Tools &amp; Cloud</h3><div class="chips">
+        <div class="chip"><svg class="lg" role="img" aria-label="GitHub"><use href="#l-gh"/></svg>GitHub</div><div class="chip"><svg class="lg" role="img" aria-label="CI/CD"><use href="#l-cicd"/></svg>CI/CD</div><div class="chip"><svg class="lg" role="img" aria-label="Docker"><use href="#l-dock"/></svg>Docker</div><div class="chip"><svg class="lg" role="img" aria-label="Azure"><use href="#l-az"/></svg>Azure</div></div></div>
+    </div>
+  </section>
+
+  <section id="featured">
+    <div class="sec-h"><h2><span class="star">★</span>Featured Project</h2>
+      <div class="slide-nav" aria-hidden="true"><span class="sq">‹</span><span class="sq">›</span></div></div>
+    <div class="card feat">
+      <div class="feat-l">
+        <h3><span class="ttl"><span class="mark">c</span>lassiccompare</span><span class="pill">R package</span></h3>
+        <p class="lead"><span class="hl">SAS PROC COMPARE-style</span> dataset comparison in R.</p>
+        <p>Replicates key features of SAS PROC COMPARE with ID matching, EXACT, ABSOLUTE, RELATIVE and PERCENT methods, variable and observation level comparison, and a SYSINFO-style return code. Built for production-versus-validation comparison of datasets <span class="hl">such as ADSL.</span></p>
+        <div class="feat-btns">
+          <a class="btn primary" href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/01_R_Package_Development/classiccompare">View Project <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn dark" href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/01_R_Package_Development/classiccompare"><svg class="ico fill" viewBox="0 0 24 24"><use href="#i-gh"/></svg>GitHub Repository</a>
+        </div>
+        <div class="feat-tags"><span class="tg">R</span><span class="tg">roxygen2</span><span class="tg">testthat</span><span class="tg">CI/CD</span><span class="tg">R CMD check</span><span class="tg ok">Production ready</span></div>
+      </div>
+      <div class="feat-r">
+        <div class="term">
+          <div class="tabs" role="tablist">
+            <button role="tab" id="t-code" aria-selected="false" aria-controls="p-code">R Code</button>
+            <button role="tab" id="t-out" aria-selected="true" aria-controls="p-out">Console Output</button>
+            <button role="tab" id="t-sum" aria-selected="false" aria-controls="p-sum">Comparison Summary</button>
           </div>
-        </li>
-        <li>
-          <div><h3>Safety monitoring dashboard</h3><span class="tag">R Shiny</span></div>
-          <div>
-            <p>Interactive adverse event review on pharmaverseadam ADaM data. Subject-level incidence by SOC and preferred term, AE listings, per-subject timelines, and filters for treatment arm, severity and treatment-emergent status.</p>
-            <!-- Add a "Live app" link here once the app is hosted, e.g. on shinyapps.io -->
-            <div class="links"><a href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/07_RShiny_Safety_Monitoring_Dashboard">Source</a></div>
-          </div>
-        </li>
-        <li>
-          <div><h3>SDTM and ADaM programming</h3><span class="tag">R, pharmaverse</span></div>
-          <div>
-            <p>SDTM domains built with controlled terminology and validation checks, and ADaM datasets with traceability from SDTM to ADaM, using pharmaverse tools.</p>
-            <div class="links">
-              <a href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/02_SDTM_Programming">SDTM</a>
-              <a href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/03_ADaM_Programming">ADaM</a>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div><h3>Tables, listings and graphs</h3><span class="tag">R</span></div>
-          <div>
-            <p>Adverse event summary tables, patient listings and safety visualizations, delivered as HTML and PDF reports.</p>
-            <div class="links"><a href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/04_TLG_Generation">Source</a></div>
-          </div>
-        </li>
-        <li>
-          <div><h3>descriptiveStats</h3><span class="tag">R package</span></div>
-          <div>
-            <p>Mean, median, mode, quartiles and IQR with NA-aware handling and clear errors for empty, non-numeric or all-NA input.</p>
-            <div class="links"><a href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/01_R_Package_Development/descriptive_stats">Source</a></div>
-          </div>
-        </li>
-        <li>
-          <div><h3>AI clinical data agent</h3><span class="tag">Python</span></div>
-          <div>
-            <p>Automated clinical data processing and schema-routed query handling in a Python workflow.</p>
-            <div class="links">
-              <a href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/06_AI_Clinical_Data_Agent">Source</a>
-              <a href="https://github.com/sharangnimonkar/clinical-programming-portfolio">All modules</a>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <p class="tag" style="margin-top:1.25rem">All portfolio work uses public data such as pharmaverseadam and CDISC pilot datasets. No employer or client material is included.</p>
+          <div class="pane" id="p-code" role="tabpanel" aria-labelledby="t-code" hidden># Illustrative only: see the repo for the exact API
+library(classiccompare)
+
+result &lt;- compare(
+  base    = adsl_production,
+  compare = adsl_validation,
+  id      = "USUBJID",
+  method  = "EXACT"
+)
+
+result$return_code</div>
+          <div class="pane" id="p-out" role="tabpanel" aria-labelledby="t-out"><span>Variables in BASE not in COMPARE     ... <b class="n" id="n1">0</b></span>
+<span>Observations in BASE not in COMPARE  ... <b class="n" id="n2">0</b></span>
+<span>Observations in COMPARE not in BASE  ... <b class="n" id="n3">0</b></span>
+<span>Values compared unequal ............. <b class="n" id="n4">0</b></span>
+
+<span id="rc" class="ok">Return code 0: datasets match ✓</span></div>
+          <div class="pane" id="p-sum" role="tabpanel" aria-labelledby="t-sum" hidden><table>
+            <tr><td>Variables only in BASE</td><td id="s1">0</td></tr>
+            <tr><td>Observations only in BASE</td><td id="s2">0</td></tr>
+            <tr><td>Observations only in COMPARE</td><td id="s3">0</td></tr>
+            <tr><td>Values compared unequal</td><td id="s4">0</td></tr></table></div>
+        </div>
+        <div class="illus">
+          <div class="hd"><svg class="ico" style="width:1rem;height:1rem" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg>Illustrative Output</div>
+          <table>
+            <tr><th>Check Type</th><th>Count</th></tr>
+            <tr><td>Variable Mismatch</td><td id="c1">0</td></tr>
+            <tr><td>Observation Mismatch</td><td id="c2">0</td></tr>
+            <tr><td>Value Differences</td><td id="c3">0</td></tr>
+            <tr><td>Attributes Different</td><td id="c4">0</td></tr>
+          </table>
+          <div class="verdict" id="verdict" aria-live="polite"><span class="tick"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span><div id="vtxt">Datasets match<small>Return code: 0</small></div></div>
+          <button class="flip" id="flip" type="button" aria-pressed="false">Introduce a difference</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec-h"><h2>All Projects</h2><a class="more" href="https://github.com/sharangnimonkar/clinical-programming-portfolio">View all projects <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a></div>
+    <div class="projects">
+
+      <article class="card proj">
+        <div class="thumb"><span class="pill">R Shiny</span><svg viewBox="0 0 260 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="260" height="120" fill="#06151b"/><rect x="6" y="5" width="60" height="4" fill="#1d4450"/><rect x="6" y="14" width="76" height="66" rx="3" fill="#0a2029" stroke="#14404a"/><g><rect x="16" y="52" width="6" height="22" fill="#3a8dde"/><rect x="25" y="34" width="6" height="40" fill="#e9a23b"/><rect x="34" y="44" width="6" height="30" fill="#8a5be0"/><rect x="43" y="26" width="6" height="48" fill="#3a8dde"/><rect x="52" y="46" width="6" height="28" fill="#e9a23b"/><rect x="61" y="38" width="6" height="36" fill="#19DDD0"/></g><rect x="88" y="14" width="92" height="66" rx="3" fill="#0a2029" stroke="#14404a"/><path d="M94 66l12-14 12 8 14-22 12 14 14-20 14 8" fill="none" stroke="#e9a23b" stroke-width="1.800"/><path d="M94 72l12-6 12 4 14-14 12 8 14-12 14 6" fill="none" stroke="#3a8dde" stroke-width="1.800"/><rect x="180" y="14" width="74" height="66" rx="3" fill="#0a2029" stroke="#14404a"/><rect x="186" y="24" width="13" height="13" rx="1.500" fill="#2fa86a" opacity=".85"/><rect x="202" y="24" width="13" height="13" rx="1.500" fill="#d9c93a" opacity=".85"/><rect x="218" y="24" width="13" height="13" rx="1.500" fill="#2fa86a" opacity=".85"/><rect x="234" y="24" width="13" height="13" rx="1.500" fill="#d9c93a" opacity=".85"/><rect x="186" y="40" width="13" height="13" rx="1.500" fill="#d9c93a" opacity=".85"/><rect x="202" y="40" width="13" height="13" rx="1.500" fill="#2fa86a" opacity=".85"/><rect x="218" y="40" width="13" height="13" rx="1.500" fill="#2fa86a" opacity=".85"/><rect x="234" y="40" width="13" height="13" rx="1.500" fill="#d9c93a" opacity=".85"/><rect x="186" y="56" width="13" height="13" rx="1.500" fill="#2fa86a" opacity=".85"/><rect x="202" y="56" width="13" height="13" rx="1.500" fill="#2fa86a" opacity=".85"/><rect x="218" y="56" width="13" height="13" rx="1.500" fill="#d9c93a" opacity=".85"/><rect x="234" y="56" width="13" height="13" rx="1.500" fill="#2fa86a" opacity=".85"/><rect x="10" y="88" width="50" height="2" fill="#1f4a57"/><rect x="150" y="88" width="60" height="2" fill="#1f4a57"/><rect x="16" y="93" width="63" height="2" fill="#1f4a57"/><rect x="150" y="93" width="77" height="2" fill="#1f4a57"/><rect x="10" y="98" width="76" height="2" fill="#1f4a57"/><rect x="150" y="98" width="94" height="2" fill="#1f4a57"/><rect x="16" y="103" width="89" height="2" fill="#1f4a57"/><rect x="150" y="103" width="71" height="2" fill="#1f4a57"/><rect x="10" y="108" width="102" height="2" fill="#1f4a57"/><rect x="150" y="108" width="88" height="2" fill="#1f4a57"/></svg></div>
+        <h3>Safety Monitoring Dashboard</h3>
+        <p>Interactive adverse event review with SOC/term analysis, timelines and filters for treatment, severity and TE status.</p>
+        <div class="tg-row"><span class="tg">R</span><span class="tg">Shiny</span><span class="tg">pharmaverse</span><span class="tg">ggplot2</span></div>
+        <a class="view" href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/07_RShiny_Safety_Monitoring_Dashboard">View Project <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a>
+      </article>
+
+      <article class="card proj">
+        <div class="thumb"><span class="pill">R · pharmaverse</span><svg viewBox="0 0 260 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="260" height="120" fill="#061820"/><rect x="8" y="8" width="14" height="3" fill="#e9a23b" opacity=".8"/><rect x="26" y="8" width="16" height="3" fill="#2a5a66"/><rect x="8" y="15" width="25" height="3" fill="#19DDD0" opacity=".8"/><rect x="37" y="15" width="23" height="3" fill="#2a5a66"/><rect x="8" y="22" width="36" height="3" fill="#8a5be0" opacity=".8"/><rect x="48" y="22" width="30" height="3" fill="#2a5a66"/><rect x="8" y="29" width="47" height="3" fill="#cfeff1" opacity=".8"/><rect x="59" y="29" width="37" height="3" fill="#2a5a66"/><rect x="8" y="36" width="22" height="3" fill="#3a8dde" opacity=".8"/><rect x="34" y="36" width="44" height="3" fill="#2a5a66"/><rect x="8" y="43" width="33" height="3" fill="#e9a23b" opacity=".8"/><rect x="45" y="43" width="21" height="3" fill="#2a5a66"/><rect x="8" y="50" width="44" height="3" fill="#19DDD0" opacity=".8"/><rect x="56" y="50" width="28" height="3" fill="#2a5a66"/><rect x="8" y="57" width="19" height="3" fill="#8a5be0" opacity=".8"/><rect x="31" y="57" width="35" height="3" fill="#2a5a66"/><rect x="8" y="64" width="30" height="3" fill="#cfeff1" opacity=".8"/><rect x="42" y="64" width="42" height="3" fill="#2a5a66"/><rect x="8" y="71" width="41" height="3" fill="#3a8dde" opacity=".8"/><rect x="53" y="71" width="19" height="3" fill="#2a5a66"/><rect x="8" y="78" width="16" height="3" fill="#e9a23b" opacity=".8"/><rect x="28" y="78" width="26" height="3" fill="#2a5a66"/><rect x="8" y="85" width="27" height="3" fill="#19DDD0" opacity=".8"/><rect x="39" y="85" width="33" height="3" fill="#2a5a66"/><rect x="8" y="92" width="38" height="3" fill="#8a5be0" opacity=".8"/><rect x="50" y="92" width="40" height="3" fill="#2a5a66"/><rect x="8" y="99" width="49" height="3" fill="#cfeff1" opacity=".8"/><rect x="61" y="99" width="17" height="3" fill="#2a5a66"/><rect x="8" y="106" width="24" height="3" fill="#3a8dde" opacity=".8"/><rect x="36" y="106" width="24" height="3" fill="#2a5a66"/><text x="160" y="22" text-anchor="middle" font-size="10" font-weight="700" fill="#fff" font-family="Inter,sans-serif">SDTM  →  ADAM</text><rect x="96" y="52" width="38" height="20" rx="3" fill="#1f6fe0" stroke="#7bb8ff"/><text x="115.0" y="65.0" text-anchor="middle" font-size="8.500" font-weight="700" fill="#fff" font-family="Inter,sans-serif">SDTM</text><path d="M134 62h12" stroke="#7bb8ff" stroke-width="1.500"/><rect x="148" y="38" width="38" height="20" rx="3" fill="#1f6fe0" stroke="#7bb8ff"/><text x="167.0" y="51.0" text-anchor="middle" font-size="8.500" font-weight="700" fill="#fff" font-family="Inter,sans-serif">ADSL</text><rect x="148" y="68" width="38" height="20" rx="3" fill="#1f6fe0" stroke="#7bb8ff"/><text x="167.0" y="81.0" text-anchor="middle" font-size="8.500" font-weight="700" fill="#fff" font-family="Inter,sans-serif">ADAE</text><rect x="202" y="38" width="38" height="20" rx="3" fill="#1f6fe0" stroke="#7bb8ff"/><text x="221.0" y="51.0" text-anchor="middle" font-size="8.500" font-weight="700" fill="#fff" font-family="Inter,sans-serif">ADAE</text><rect x="202" y="68" width="38" height="20" rx="3" fill="#1f6fe0" stroke="#7bb8ff"/><text x="221.0" y="81.0" text-anchor="middle" font-size="8.500" font-weight="700" fill="#fff" font-family="Inter,sans-serif">ADAE</text><path d="M186 48h14M186 78h14" stroke="#7bb8ff" stroke-width="1.500"/></svg></div>
+        <h3>SDTM and ADaM Programming</h3>
+        <p>End-to-end SDTM and ADaM datasets with controlled terminology, validation checks and traceability.</p>
+        <div class="tg-row"><span class="tg">SDTM</span><span class="tg">ADaM</span><span class="tg">admiral</span><span class="tg">tidyverse</span></div>
+        <a class="view" href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/02_SDTM_Programming">View Project <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a>
+      </article>
+
+      <article class="card proj">
+        <div class="thumb"><span class="pill">R</span><svg viewBox="0 0 260 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="260" height="120" fill="#eef3f5"/><rect x="10" y="8" width="96" height="4" fill="#5f747d"/><rect x="10" y="16" width="70" height="3" fill="#8a9ea6"/><rect x="132" y="12" width="50" height="3" fill="#5f747d"/><rect x="12" y="34" width="104" height="1" fill="#c3d0d5"/><rect x="14" y="37" width="30" height="3" fill="#8a9ea6"/><rect x="92" y="37" width="18" height="3" fill="#8a9ea6"/><rect x="12" y="45" width="104" height="1" fill="#c3d0d5"/><rect x="14" y="48" width="39" height="3" fill="#8a9ea6"/><rect x="92" y="48" width="18" height="3" fill="#8a9ea6"/><rect x="12" y="56" width="104" height="1" fill="#c3d0d5"/><rect x="14" y="59" width="48" height="3" fill="#8a9ea6"/><rect x="92" y="59" width="18" height="3" fill="#8a9ea6"/><rect x="12" y="67" width="104" height="1" fill="#c3d0d5"/><rect x="14" y="70" width="57" height="3" fill="#8a9ea6"/><rect x="92" y="70" width="18" height="3" fill="#8a9ea6"/><rect x="12" y="78" width="104" height="1" fill="#c3d0d5"/><rect x="14" y="81" width="36" height="3" fill="#8a9ea6"/><rect x="92" y="81" width="18" height="3" fill="#8a9ea6"/><rect x="12" y="89" width="104" height="1" fill="#c3d0d5"/><rect x="14" y="92" width="45" height="3" fill="#8a9ea6"/><rect x="92" y="92" width="18" height="3" fill="#8a9ea6"/><rect x="12" y="100" width="104" height="1" fill="#c3d0d5"/><rect x="14" y="103" width="54" height="3" fill="#8a9ea6"/><rect x="92" y="103" width="18" height="3" fill="#8a9ea6"/><rect x="164" y="30" width="70" height="8" fill="#2f8ee0"/><rect x="138" y="32" width="22" height="3" fill="#a9b8be"/><rect x="164" y="43" width="52" height="8" fill="#2f8ee0"/><rect x="138" y="45" width="22" height="3" fill="#a9b8be"/><rect x="164" y="56" width="60" height="8" fill="#2f8ee0"/><rect x="138" y="58" width="22" height="3" fill="#a9b8be"/><rect x="164" y="69" width="34" height="8" fill="#2f8ee0"/><rect x="138" y="71" width="22" height="3" fill="#a9b8be"/><rect x="164" y="82" width="26" height="8" fill="#2f8ee0"/><rect x="138" y="84" width="22" height="3" fill="#a9b8be"/><rect x="164" y="95" width="18" height="8" fill="#2f8ee0"/><rect x="138" y="97" width="22" height="3" fill="#a9b8be"/><rect x="164" y="108" width="12" height="8" fill="#2f8ee0"/><rect x="138" y="110" width="22" height="3" fill="#a9b8be"/><path d="M162 26v76h86" stroke="#7a8d95" fill="none"/></svg></div>
+        <h3>Tables, Listings and Graphs</h3>
+        <p>Patient listings, adverse event summary tables and safety visualizations delivered as HTML and PDF reports.</p>
+        <div class="tg-row"><span class="tg">gt</span><span class="tg">gtsummary</span><span class="tg">rtables</span><span class="tg">tern</span></div>
+        <a class="view" href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/04_TLG_Generation">View Project <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a>
+      </article>
+
+      <article class="card proj">
+        <div class="thumb"><span class="pill">R package</span><svg viewBox="0 0 260 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="260" height="120" fill="#061820"/><text x="10" y="16" font-size="8" font-weight="600" fill="#eaf6f8" font-family="Inter,sans-serif">Distribution of Variables</text><path d="M30 24v80M30 104h130" stroke="#4a6a74"/><g font-size="6" fill="#9fb9c2" font-family="Inter,sans-serif"><text x="14" y="30">100</text><text x="18" y="66">50</text></g><g stroke="#e8f4f6" fill="none"><path d="M66 32v64" stroke="#e8f4f6"/><path d="M106 36v56" stroke="#e8f4f6"/><path d="M146 26v74" stroke="#e8f4f6"/></g><rect x="54" y="52" width="24" height="26" rx="3" fill="#2f8ee0"/><rect x="94" y="54" width="24" height="24" rx="3" fill="#e9a23b"/><rect x="134" y="62" width="24" height="16" rx="3" fill="#8a5be0"/><path d="M54 64h24M94 66h24M134 70h24" stroke="#061820" stroke-width="2"/><g fill="#e8f4f6"><circle cx="66" cy="32" r="1.200"/><circle cx="106" cy="36" r="1.200"/><circle cx="146" cy="26" r="1.200"/><circle cx="146" cy="30" r="1.200"/></g><text x="180" y="40" font-size="7.500" font-weight="600" fill="#eaf6f8" font-family="Inter,sans-serif">Treatment</text><g font-size="7" fill="#eaf6f8" font-family="Inter,sans-serif"><circle cx="184" cy="52" r="3" fill="#2f8ee0"/><text x="192" y="55">Placebo</text><circle cx="184" cy="66" r="3" fill="#e9a23b"/><text x="192" y="69">Low dose</text><circle cx="184" cy="80" r="3" fill="#8a5be0"/><text x="192" y="83">High dose</text></g></svg></div>
+        <h3>descriptiveStats</h3>
+        <p>Mean, median, mode, quartiles and IQR with NA-aware handling and clear errors for empty or non-numeric input.</p>
+        <div class="tg-row"><span class="tg">R</span><span class="tg">roxygen2</span><span class="tg">testthat</span><span class="tg">CI/CD</span></div>
+        <a class="view" href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/01_R_Package_Development/descriptive_stats">View Project <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a>
+      </article>
+
+      <article class="card proj alt">
+        <div class="hd"><h3>Python Data Processing Engine</h3><span class="pill">Python</span></div>
+        <div class="ill"><svg viewBox="0 0 260 68" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect x="4" y="4" width="54" height="60" rx="9" fill="#0a3a4a" stroke="#1fb8b0"/><rect x="20" y="13" width="22" height="26" rx="3" fill="none" stroke="#19DDD0" stroke-width="2"/><path d="M25 21h12M25 27h12M25 33h8" stroke="#19DDD0" stroke-width="1.800"/><text x="31" y="57" text-anchor="middle" font-size="6.500" fill="#cfe6ea" font-family="Inter,sans-serif">ADSL data</text><rect x="68" y="4" width="54" height="60" rx="9" fill="#0a3a4a" stroke="#1fb8b0"/><polygon points="95,12 107,19 107,33 95,40 83,33 83,19" fill="none" stroke="#3a8dde" stroke-width="2"/><path d="M89 26l4 4 8-8" stroke="#3a8dde" stroke-width="2" fill="none"/><text x="95" y="57" text-anchor="middle" font-size="6.500" fill="#cfe6ea" font-family="Inter,sans-serif">Validation</text><rect x="132" y="4" width="54" height="60" rx="9" fill="#0a3a4a" stroke="#1fb8b0"/><rect x="147" y="14" width="24" height="26" rx="3" fill="#3a5fd0" opacity=".8"/><path d="M152 34v-8M159 34v-14M166 34v-10" stroke="#cfe6ff" stroke-width="3"/><text x="159" y="57" text-anchor="middle" font-size="6.500" fill="#cfe6ea" font-family="Inter,sans-serif">Risk Score</text><rect x="196" y="4" width="54" height="60" rx="9" fill="#0a3a4a" stroke="#1fb8b0"/><path d="M214 36a8 8 0 0 1 1-15 10 10 0 0 1 19 3 6 6 0 0 1-1 12z" fill="none" stroke="#19DDD0" stroke-width="2"/><path d="M223 28v6M220 31l3 3 3-3" stroke="#19DDD0" stroke-width="1.800" fill="none"/><text x="223" y="57" text-anchor="middle" font-size="6.500" fill="#cfe6ea" font-family="Inter,sans-serif">Reporting</text><path d="M60 34h8m-3-3l3 3-3 3" stroke="#eaf6f8" stroke-width="1.600" fill="none"/><path d="M124 34h8m-3-3l3 3-3 3" stroke="#eaf6f8" stroke-width="1.600" fill="none"/><path d="M188 34h8m-3-3l3 3-3 3" stroke="#eaf6f8" stroke-width="1.600" fill="none"/></svg></div>
+        <p>Clinical data validation, protocol deviation checks and adverse event risk scoring using Pandas and Pydantic.</p>
+        <div class="tg-row"><span class="tg">Python</span><span class="tg">Pandas</span><span class="tg">Pydantic</span><span class="tg">FastAPI</span></div>
+        <a class="view" href="https://github.com/sharangnimonkar/clinical-programming-portfolio">View Project <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a>
+      </article>
+
+      <article class="card proj alt">
+        <div class="hd"><h3>AI Clinical Data Agent</h3><span class="pill">Python, LLM</span></div>
+        <div class="ill"><svg viewBox="0 0 260 74" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect x="10" y="12" width="34" height="46" rx="3" fill="#e6f0f5"/><path d="M16 22h22M16 29h22M16 36h14" stroke="#3a8dde" stroke-width="2.500"/><rect x="28" y="42" width="12" height="10" fill="#2f8ee0"/><path d="M52 36h20m-4-4l4 4-4 4" stroke="#eaf6f8" stroke-width="1.800" fill="none"/><g stroke="#eaf6f8" stroke-width="1.800" fill="none"><path d="M100 16c-12 0-20 8-18 20 0 8 6 14 14 14h8c10 0 16-8 16-18s-8-16-20-16z"/><path d="M100 18v32M90 30h20M92 40h16"/></g><g fill="#19DDD0"><circle cx="90" cy="30" r="2"/><circle cx="110" cy="30" r="2"/><circle cx="100" cy="40" r="2"/></g><path d="M130 36h40m-4-4l4 4-4 4" stroke="#eaf6f8" stroke-width="1.800" fill="none" transform="translate(-6 0)"/><circle cx="188" cy="16" r="3.500" fill="none" stroke="#cfe6ea"/><text x="196" y="19" font-size="8" fill="#eaf6f8" font-family="Inter,sans-serif">Patient Profiles</text><circle cx="188" cy="33" r="3.500" fill="none" stroke="#cfe6ea"/><text x="196" y="36" font-size="8" fill="#eaf6f8" font-family="Inter,sans-serif">Safety Narratives</text><circle cx="188" cy="50" r="3.500" fill="none" stroke="#cfe6ea"/><text x="196" y="53" font-size="8" fill="#eaf6f8" font-family="Inter,sans-serif">Clinical Queries</text><circle cx="188" cy="67" r="3.500" fill="none" stroke="#cfe6ea"/><text x="196" y="70" font-size="8" fill="#eaf6f8" font-family="Inter,sans-serif">Deliverables</text></svg></div>
+        <p>Local LLM agent for patient profiles, safety narratives and clinical data queries using LangChain.</p>
+        <div class="tg-row"><span class="tg">Python</span><span class="tg">LangChain</span><span class="tg">LLM</span><span class="tg">RAG</span></div>
+        <a class="view" href="https://github.com/sharangnimonkar/clinical-programming-portfolio/tree/main/06_AI_Clinical_Data_Agent">View Project <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a>
+      </article>
+
+      <aside class="card proj-wide">
+        <svg class="vials" viewBox="0 0 420 260" preserveAspectRatio="xMaxYMid slice" aria-hidden="true">
+          <defs>
+            <filter id="bl1"><feGaussianBlur stdDeviation="3"/></filter>
+            <filter id="bl2"><feGaussianBlur stdDeviation="1.200"/></filter>
+            <filter id="bl3"><feGaussianBlur stdDeviation="6"/></filter>
+            <linearGradient id="gv" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9fd6dc" stop-opacity=".25"/><stop offset=".5" stop-color="#d4f3f5" stop-opacity=".6"/><stop offset="1" stop-color="#7fbfc8" stop-opacity=".25"/></linearGradient>
+            <linearGradient id="gliq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1fb8b0" stop-opacity=".2"/><stop offset="1" stop-color="#19DDD0" stop-opacity=".55"/></linearGradient>
+          </defs>
+          <rect width="420" height="260" fill="#0a3a44"/>
+          <g filter="url(#bl1)" opacity=".75">
+            <rect x="70" y="70" width="52" height="150" rx="8" fill="url(#gv)"/><rect x="66" y="52" width="60" height="26" rx="6" fill="#b9e4e8" opacity=".7"/>
+            <rect x="150" y="105" width="42" height="115" rx="7" fill="url(#gv)"/><rect x="146" y="90" width="50" height="20" rx="5" fill="#b9e4e8" opacity=".7"/>
+          </g>
+          <g filter="url(#bl2)">
+            <rect x="215" y="120" width="34" height="100" rx="6" fill="url(#gv)"/><rect x="212" y="108" width="40" height="16" rx="4" fill="#cfeff1" opacity=".85"/><rect x="217" y="165" width="30" height="55" rx="5" fill="url(#gliq)"/>
+            <rect x="262" y="115" width="30" height="105" rx="6" fill="url(#gv)"/><rect x="259" y="103" width="36" height="15" rx="4" fill="#cfeff1" opacity=".85"/><rect x="264" y="160" width="26" height="60" rx="5" fill="url(#gliq)"/>
+            <rect x="302" y="125" width="32" height="95" rx="6" fill="url(#gv)"/><rect x="299" y="112" width="38" height="16" rx="4" fill="#cfeff1" opacity=".85"/><rect x="305" y="170" width="28" height="50" rx="5" fill="url(#gliq)"/>
+            <rect x="345" y="130" width="30" height="90" rx="6" fill="url(#gv)"/><rect x="342" y="118" width="36" height="15" rx="4" fill="#cfeff1" opacity=".85"/>
+          </g>
+          <g filter="url(#bl3)" opacity=".8"><path d="M330 0c40 0 90 20 90 80 0 40-30 60-70 50-30-8-40-50-20-90z" fill="#0d2f38"/></g>
+          <g transform="rotate(38 330 90)"><rect x="300" y="10" width="14" height="150" rx="5" fill="#cfeff1" opacity=".85" filter="url(#bl2)"/><path d="M300 160l7 36 7-36z" fill="#e8fbfc" opacity=".9" filter="url(#bl2)"/></g>
+          <rect y="215" width="420" height="45" fill="#052029" opacity=".6" filter="url(#bl3)"/>
+        </svg>
+        <blockquote>“Turning clinical data<br>into reliable insights with<br>automation, validation and AI.”</blockquote>
+        <div class="values">
+          <span><svg class="vi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8.500 3v6.500c0 5-3.600 8.800-8.500 10.500C7.100 20.300 3.500 16.500 3.500 11.500V5z" fill="#19DDD0"/><path d="M8 12l3 3.200 5.500-6.200" stroke="#022a28" stroke-width="2.600" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Reproducible</span>
+          <span><svg class="vi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8.500 3v6.500c0 5-3.600 8.800-8.500 10.500C7.100 20.300 3.500 16.500 3.500 11.500V5z" fill="#19DDD0"/><path d="M8 12l3 3.200 5.500-6.200" stroke="#022a28" stroke-width="2.600" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Validated</span>
+          <span><svg class="vi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8.500 3v6.500c0 5-3.600 8.800-8.500 10.500C7.100 20.300 3.500 16.500 3.500 11.500V5z" fill="#19DDD0"/><path d="M8 12l3 3.200 5.500-6.200" stroke="#022a28" stroke-width="2.600" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Regulatory-aware</span>
+          <span><svg class="vi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.900 6.300 6.800.7-5.100 4.600 1.500 6.700L12 16.800 5.900 20.300l1.500-6.700L2.300 9l6.800-.7z" fill="#19DDD0"/></svg>Real-world impact</span>
+        </div>
+      </aside>
+    </div>
+    <p style="margin:.9rem 0 0;font-size:.75rem;color:var(--muted)">All portfolio work uses public data such as pharmaverseadam and CDISC pilot datasets. No employer or client material is included.</p>
+  </section>
+
+  <div class="two">
+    <section id="experience" class="card panel">
+      <h2><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg>Work Experience</h2>
+      <div class="job"><div class="wm inf">Infosys</div><div><b>Clinical SAS Programmer</b><span>Feb 2024 – Mar 2026 | Pfizer (US)</span><span>SDTM · ADaM · Safety · Listings · Reports</span></div></div>
+      <div class="job"><div class="wm ics">TCS</div><div><b>Clinical SAS Programmer</b><span>Sep 2021 – Sep 2022 | Viatris (Switzerland)</span><span>~1 year | SDTM</span></div></div>
+      <div class="job"><div class="wm wip">wipro</div><div><b>SAS Developer</b><span>Mar 2021 – Sep 2021 | Wipro</span><span>Data programming · SDTM</span></div></div>
+      <div class="job"><div class="wm sig">Signetsoft</div><div><b>Clinical SAS Intern</b><span>Aug 2020 – Feb 2021 | Signetsoft</span><span>Clinical programming support</span></div></div>
+      <div class="job"><div class="wm hei"><i>★</i>HEINEKEN</div><div><b>Microbiologist / Quality Executive</b><span>~4 years | Heineken</span><span>Traceability · SAP S/4HANA exposure</span></div></div>
     </section>
 
-    <section id="skills">
-      <h2>Skills</h2>
-      <dl class="skills">
-        <dt>Languages</dt><dd>SAS, R, Python</dd>
-        <dt>Dashboards</dt><dd>R Shiny</dd>
-        <dt>Version control and CI</dt><dd>Git, GitHub Actions</dd>
-      </dl>
+    <section id="education" class="card panel">
+      <h2><svg class="ico" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.500 3 3 6 3s6-1.500 6-3v-5"/></svg>Education &amp; Certifications</h2>
+      <div class="edu-grid">
+        <div>
+          <div class="edu"><span class="ei"><svg class="ico" viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg></span><div><b>MSc Diagnostics &amp; Precision Medicine</b><span>Dublin City University (DCU)</span><span>Conferred: 29 Nov 2023 | UK Master Equivalent</span></div></div>
+          <div class="edu"><span class="ei"><svg class="ico" viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg></span><div><b>MSc Microbiology</b><span>University (India)</span></div></div>
+          <div class="edu"><span class="ei"><svg class="ico" viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg></span><div><b>BSc Chemistry / Zoology / Microbiology</b><span>University (India)</span></div></div>
+          <div class="edu"><span class="ei"><svg class="ico" viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg></span><div><b>Clinical Research Diploma</b><span>University (India)</span></div></div>
+          <div class="edu"><span class="ei"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5"/><path d="M9 13l-2 8 5-3 5 3-2-8"/></svg></span><div><b>SAS Certified Specialist: Base Programming Using SAS 9.4</b><span>Score: 912/1000</span></div></div>
+        </div>
+        <div class="minis">
+          <div class="mini"><svg class="lg sm wide" aria-hidden="true"><use href="#l-sas"/></svg></div>
+          <div class="mini"><svg class="lg sm" aria-hidden="true"><use href="#l-r"/></svg>R</div>
+          <div class="mini"><svg class="lg sm" aria-hidden="true"><use href="#l-py"/></svg>Python</div>
+          <div class="mini"><svg class="lg sm" aria-hidden="true"><use href="#l-pharma"/></svg>Pharmaverse</div>
+          <div class="mini"><svg class="lg sm" aria-hidden="true"><use href="#l-cdisc"/></svg>CDISC</div>
+        </div>
+      </div>
     </section>
+  </div>
 
-    <section id="education">
-      <h2>Education</h2>
-      <ul class="projects">
-        <li>
-          <div><h3>MS Diagnostics and Precision Medicine</h3><span class="tag">2022 – 2023</span></div>
-          <div><p>Dublin City University</p></div>
-        </li>
-        <li>
-          <div><h3>PG Diploma, Clinical Research and Data Management</h3><span class="tag">2020 – 2021</span></div>
-          <div><p>Cliniminds, Mumbai</p></div>
-        </li>
-        <li>
-          <div><h3>MS Microbiology</h3><span class="tag">2014 – 2016</span></div>
-          <div><p>Nagpur University</p></div>
-        </li>
-      </ul>
-    </section>
+  <section id="about" class="card about">
+    <h2>About</h2>
+    <p>I work across the full path from SDTM through ADaM to safety outputs. Client-facing roles at Pfizer (via Infosys) and Viatris covered clinical SAS programming, safety reporting and automation of patient profiles and narratives.</p>
+    <p>I hold an MS in Diagnostics and Precision Medicine from Dublin City University and an MS in Microbiology, and I worked as a microbiologist before moving into clinical programming. I'm based in the UK with full right to work.</p>
+  </section>
 
-    <section id="about" class="about">
-      <h2>About</h2>
-      <p>I work across the full path from SDTM through ADaM to safety outputs. Client-facing roles at Pfizer (via Infosys) and Viatris (via TCS) covered clinical SAS programming, safety reporting and automation of patient profiles and narratives.</p>
-      <p>I hold an MS in Diagnostics and Precision Medicine from Dublin City University and an MS in Microbiology, and I worked as a microbiologist before moving into clinical programming. I'm based in the UK with full right to work.</p>
-    </section>
+  <section id="contact" class="card cta">
+    <svg class="ico big" viewBox="0 0 24 24" aria-hidden="true"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg>
+    <div class="txt"><h3>Interested in working together?</h3><p>Open to clinical programmer, statistical programmer, data engineering and healthcare AI roles in the UK.</p></div>
+    <a class="btn primary" href="mailto:sharangnimonkar@gmail.com">Get in touch <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <div class="soc">
+      <a href="https://www.linkedin.com/in/sharang92/" aria-label="LinkedIn"><svg class="ico fill" style="width:1.6rem;height:1.6rem" viewBox="0 0 24 24"><use href="#i-in"/></svg></a>
+      <a href="https://github.com/sharangnimonkar" aria-label="GitHub"><svg class="ico fill" style="width:1.6rem;height:1.6rem" viewBox="0 0 24 24"><use href="#i-gh"/></svg></a>
+      <a href="mailto:sharangnimonkar@gmail.com" aria-label="Email"><svg class="ico" style="width:1.6rem;height:1.6rem" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+    </div>
+  </section>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Open to senior clinical and analytical data programmer roles in the UK.</p>
-      <p class="links">
-        <a href="mailto:sharangnimonkar@gmail.com">sharangnimonkar@gmail.com</a>
-        <a href="tel:+447466517292">+44 7466517292</a>
-        <a href="https://www.linkedin.com/in/sharang92/">LinkedIn</a>
-        <a href="https://github.com/sharangnimonkar">GitHub</a>
-      </p>
-    </section>
-  </main>
-
-  <footer>Built with plain HTML and CSS. Hosted on GitHub Pages.</footer>
-</div>
+  <footer><span>Built with plain HTML and CSS. Hosted on GitHub Pages.</span><span><a href="tel:+447466517292">+44 7466517292</a></span></footer>
+</main>
 
 <script>
 (function(){
-  var root=document.documentElement, tb=document.getElementById('theme');
-  function setTheme(t){root.setAttribute('data-theme',t);tb.textContent=t==='dark'?'☀':'☾';
-    tb.setAttribute('aria-label','Switch to '+(t==='dark'?'light':'dark')+' theme');}
-  var saved=null; try{saved=localStorage.getItem('theme');}catch(e){}
-  setTheme(saved==='light'?'light':'dark');
-  tb.addEventListener('click',function(){
-    var n=root.getAttribute('data-theme')==='dark'?'light':'dark'; setTheme(n);
-    try{localStorage.setItem('theme',n);}catch(e){}
-  });
-  var btn=document.getElementById('flip'), vals=document.getElementById('vals'),
-      st=document.getElementById('status'), diff=false;
+  /* tabs */
+  var tabs=[].slice.call(document.querySelectorAll('.tabs [role=tab]'));
+  tabs.forEach(function(t){t.addEventListener('click',function(){
+    tabs.forEach(function(x){
+      var on=x===t; x.setAttribute('aria-selected',on);
+      document.getElementById(x.getAttribute('aria-controls')).hidden=!on;
+    });
+  });});
+
+  /* introduce a difference */
+  var btn=document.getElementById('flip'), diff=false;
+  function set(id,v){document.getElementById(id).textContent=v;}
   btn.addEventListener('click',function(){
     diff=!diff;
     btn.setAttribute('aria-pressed',diff);
     btn.textContent=diff?'Restore match':'Introduce a difference';
-    vals.className='row '+(diff?'diff':'ok');
-    vals.textContent=diff?'Values compared unequal ............ 3':'Values compared unequal ............ 0';
-    st.className=diff?'bad':'';
-    st.textContent=diff?'Non-zero return code: differences found':'Return code 0: datasets match';
+    var n=diff?3:0;
+    set('n4',n);
+    set('s4',n); set('c3',n);
+    var rc=document.getElementById('rc');
+    rc.className=diff?'bad':'ok';
+    rc.textContent=diff?'Non-zero return code: differences found':'Return code 0: datasets match ✓';
+    var v=document.getElementById('verdict');
+    v.className='verdict'+(diff?' bad':'');
+    document.getElementById('vtxt').innerHTML=diff?'Differences found<small>Return code: non-zero</small>':'Datasets match<small>Return code: 0</small>';
+    v.querySelector('.tick').innerHTML=diff?'<b aria-hidden="true">!</b>':'<svg class="ico" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>';
   });
 })();
 </script>
