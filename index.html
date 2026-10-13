@@ -69,30 +69,41 @@ h1 .a{color:var(--accent)}
 .fact{display:flex;align-items:center;gap:.65rem;font-size:.75rem;line-height:1.3;color:var(--muted)}
 .fact .ico{color:var(--accent);width:1.4rem;height:1.4rem}
 .fact b{display:block;color:var(--ink);font-weight:500}
-.portrait{position:relative;min-height:19rem;display:flex;justify-content:center;align-items:center}
+/* 1. Update the parent wrapper to let its background elements overflow down past its floor */
+.portrait {
+  position: relative;
+  min-height: 19rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Ensure the container doesn't chop off elements absolute-positioned below it */
+  overflow: visible; 
+}
+
+/* 2. Reconfigure the positioning format from percentages to absolute physical viewport dimensions */
 .helix {
   position: absolute;
   right: -2rem; 
   top: -10%;
   
-  /* 1. Dropped from -35% to -65% to pull the image element down further */
-  bottom: -65%; 
+  /* Use explicit pixel sizing to completely break out of the parent's default height ceiling */
+  height: 28rem; 
   width: 32rem; 
+  
   opacity: .35; 
   object-fit: fill; 
   object-position: right center;
   pointer-events: none;
   z-index: 0;
 
-  /* 2. Adjusted bottom gradient from 50% to 25% to allow the image to stay visible much lower down */
+  /* Keep the lower-feathered alpha-mask code so it doesn't leave a hard visual cut line */
   -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%),
-                      linear-gradient(to top, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 100%);
+                      linear-gradient(to top, rgba(0,0,0,1) 15%, rgba(0,0,0,0) 100%);
   mask-image: linear-gradient(to left, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%),
-              linear-gradient(to top, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 100%);
+              linear-gradient(to top, rgba(0,0,0,1) 15%, rgba(0,0,0,0) 100%);
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
 }
-
 
 .avatar{position:relative;z-index:1;width:15.5rem;height:15.5rem;border-radius:50%;border:2px solid var(--accent);box-shadow:0 0 40px rgba(25,221,208,.35);background:var(--bg2);display:grid;place-items:center;font:700 3.4rem var(--sans);color:var(--accent);overflow:hidden;margin-right: 15.0rem;}
 .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position: center 30%;}
