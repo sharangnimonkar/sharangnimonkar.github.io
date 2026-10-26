@@ -343,7 +343,10 @@ h2,.panel h2{font-family:var(--serif);font-weight:700;font-size:1.7rem;letter-sp
 .values .vi{width:1.2rem;height:1.2rem;flex:none}
 @media (max-width:34rem){.proj-wide{padding:1.2rem 1rem}.proj-wide blockquote{font-size:1.25rem}.values{gap:.4rem;font-size:.56rem}.values span{gap:.25rem}.values .vi{width:.9rem;height:.9rem}}
 
-.projects{gap:.9rem}
+.projects{gap:.9rem;grid-template-columns:repeat(4,minmax(0,1fr))}
+.projects>*{min-width:0}
+@media (max-width:64rem){.projects{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:34rem){.projects{grid-template-columns:minmax(0,1fr)}}
 .proj{padding:.65rem;border-color:#1f8f88;box-shadow:0 0 22px rgba(25,221,208,.07) inset,0 0 0 1px rgba(25,221,208,.05);background:linear-gradient(180deg,rgba(9,44,55,.8),rgba(5,26,34,.9))}
 .proj .thumb{height:8.4rem;margin-bottom:.8rem;border-radius:9px}
 .proj .thumb svg{width:100%;height:100%}
